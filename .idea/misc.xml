@@ -3,9 +3,6 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
-  <component name="CompilerWorkspaceConfiguration">
-    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
-  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -16,20 +13,5 @@
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
-  </component>
-  <component name="SaveActionSettings">
-    <option name="actions">
-      <set>
-        <option value="activate" />
-        <option value="activateOnShortcut" />
-        <option value="organizeImports" />
-        <option value="reformat" />
-        <option value="reload" />
-        <option value="missingOverrideAnnotation" />
-        <option value="finalPrivateMethod" />
-        <option value="unnecessarySemicolon" />
-      </set>
-    </option>
-    <option name="configurationPath" value="" />
   </component>
 </project>
