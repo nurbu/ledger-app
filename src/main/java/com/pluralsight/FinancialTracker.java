@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -75,6 +76,22 @@ public class FinancialTracker {
      * • Each line looks like: date|time|description|vendor|amount
      */
     public static void loadTransactions(String fileName) {
+
+        File file = new File(fileName);
+
+        // Check if the file exists
+        if (!file.exists()) {
+            try {
+                // Creates new "transactions.csv" and lets user know.
+                file.createNewFile();
+                System.out.println("New \"transactions.csv\" file created");
+            } catch (IOException e) {
+                // Catches any errors when creating file.
+                System.out.println("Error creating file: " + e.getMessage());
+            }
+            // Prevents reading file if file was just created.
+            return;
+        }
         // Uses try-with-resources to auto close BufferReader
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -114,7 +131,9 @@ public class FinancialTracker {
      */
     private static void addDeposit(Scanner scanner) {
         boolean addMore = true;
+        // Re-prompts the user to add more deposits
         while (addMore) {
+            // Prompt and validate date time input
             LocalDateTime dateTime = null;
             boolean isValidDateTime = false;
             while (!isValidDateTime) {
@@ -127,12 +146,13 @@ public class FinancialTracker {
                 }
             }
 
+            // Get description and vendor from user
             System.out.print("Enter a description: ");
             String description = scanner.nextLine();
-
             System.out.print("\nEnter a vendor: ");
             String vendor = scanner.nextLine();
 
+            // Prompts then validates deposit amount to be positive
             double amount = 0;
             boolean isValidAmount = false;
             while (!isValidAmount) {
@@ -152,6 +172,7 @@ public class FinancialTracker {
 
             }
 
+            // Splits dateTimes and adds the transaction to transactions ArrayList and transactions.csv.
             LocalDate date = dateTime.toLocalDate();
             LocalTime time = dateTime.toLocalTime();
             transactions.add(new Transaction(date, time, description, vendor, amount));
@@ -159,7 +180,7 @@ public class FinancialTracker {
             System.out.println("Transaction added successfully.");
             System.out.println("Would you like to add another deposit? (Y/N)");
             String input = scanner.nextLine().trim();
-            if (input.toUpperCase().equals("n")) {
+            if (input.toUpperCase().equals("N")) {
                 addMore = false;
             }
         }
