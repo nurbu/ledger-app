@@ -209,7 +209,62 @@ public class FinancialTracker {
      * then converted to a negative amount before storing.
      */
     private static void addPayment(Scanner scanner) {
-        // TODO
+        boolean addMore = true;
+        // Re-prompts the user to add more payments
+        while (addMore) {
+            // Prompt and validate date time input
+            LocalDateTime dateTime = null;
+            boolean isValidDateTime = false;
+            while (!isValidDateTime) {
+                System.out.print("Enter date and time(yyyy-MM-dd HH:mm:ss): ");
+                try {
+                    dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATE_FMT);
+                    isValidDateTime = true;
+                } catch (DateTimeException e) {
+                    System.out.println("Invalid date and time. Please enter a valid date and time.");
+                }
+            }
+
+            // Get description and vendor from user
+            System.out.print("Enter a description: ");
+            String description = scanner.nextLine();
+            System.out.print("\nEnter a vendor: ");
+            String vendor = scanner.nextLine();
+
+            // Prompts then validates payment amount to be positive
+            double amount = 0;
+            boolean isValidAmount = false;
+            while (!isValidAmount) {
+                System.out.print("Enter deposit amount: ");
+                if (scanner.hasNextDouble()) {
+                    amount = scanner.nextDouble();
+                    scanner.nextLine();
+                    if (amount > 0) {
+                        isValidAmount = true;
+                    } else {
+                        System.out.println("Please enter a positive amount");
+                    }
+                } else {
+                    System.out.println("Invalid amount. Please enter a valid amount.");
+                    scanner.nextLine();
+                }
+
+            }
+            // Changes amount to negative
+            amount *= -1;
+            // Splits dateTimes and adds the transaction to transactions ArrayList and transactions.csv.
+            LocalDate date = dateTime.toLocalDate();
+            LocalTime time = dateTime.toLocalTime();
+            Transaction newTransaction = new Transaction(date, time, description, vendor, amount);
+            transactions.add(newTransaction);
+            appendTransactionToFile(newTransaction);
+            System.out.println("Transaction added successfully.");
+            System.out.println("Would you like to add another payment? (Y/N)");
+            String input = scanner.nextLine().trim();
+            if (input.toUpperCase().equals("N")) {
+                addMore = false;
+            }
+        }
     }
 
     /* ------------------------------------------------------------------
