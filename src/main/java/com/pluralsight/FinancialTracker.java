@@ -3,7 +3,9 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -111,7 +113,56 @@ public class FinancialTracker {
      * Store the amount as-is (positive) and append to the file.
      */
     private static void addDeposit(Scanner scanner) {
-        // TODO
+        boolean addMore = true;
+        while (addMore) {
+            LocalDateTime dateTime = null;
+            boolean isValidDateTime = false;
+            while (!isValidDateTime) {
+                System.out.print("Enter date and time(yyyy-MM-dd HH:mm:ss): ");
+                try {
+                    dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATE_FMT);
+                    isValidDateTime = true;
+                } catch (DateTimeException e) {
+                    System.out.println("Invalid date and time. Please enter a valid date and time.");
+                }
+            }
+
+            System.out.print("Enter a description: ");
+            String description = scanner.nextLine();
+
+            System.out.print("\nEnter a vendor: ");
+            String vendor = scanner.nextLine();
+
+            double amount = 0;
+            boolean isValidAmount = false;
+            while (!isValidAmount) {
+                System.out.print("Enter deposit amount: ");
+                if (scanner.hasNextDouble()) {
+                    amount = scanner.nextDouble();
+                    scanner.nextLine();
+                    if (amount > 0) {
+                        isValidAmount = true;
+                    } else {
+                        System.out.println("Please enter a positive amount");
+                    }
+                } else {
+                    System.out.println("Invalid amount. Please enter a valid amount.");
+                    scanner.nextLine();
+                }
+
+            }
+
+            LocalDate date = dateTime.toLocalDate();
+            LocalTime time = dateTime.toLocalTime();
+            transactions.add(new Transaction(date, time, description, vendor, amount));
+
+            System.out.println("Transaction added successfully.");
+            System.out.println("Would you like to add another deposit? (Y/N)");
+            String input = scanner.nextLine().trim();
+            if (input.toUpperCase().equals("n")) {
+                addMore = false;
+            }
+        }
     }
 
     /**
