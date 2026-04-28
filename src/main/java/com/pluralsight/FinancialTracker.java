@@ -1,9 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -175,14 +172,34 @@ public class FinancialTracker {
             // Splits dateTimes and adds the transaction to transactions ArrayList and transactions.csv.
             LocalDate date = dateTime.toLocalDate();
             LocalTime time = dateTime.toLocalTime();
-            transactions.add(new Transaction(date, time, description, vendor, amount));
-
+            Transaction newTransaction = new Transaction(date, time, description, vendor, amount);
+            transactions.add(newTransaction);
+            appendTransactionToFile(newTransaction);
             System.out.println("Transaction added successfully.");
             System.out.println("Would you like to add another deposit? (Y/N)");
             String input = scanner.nextLine().trim();
             if (input.toUpperCase().equals("N")) {
                 addMore = false;
             }
+        }
+    }
+
+    /*
+    Appends a single transaction to transactions.csv
+    Format: date|time|description|vendor|amount
+     */
+    public static void appendTransactionToFile(Transaction transaction) {
+        // Uses a try-with-resources to auto close BufferWriter and appends transactions given to transactions.csv file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            // Formatted write
+            bw.write(transaction.getDate() + "|" + transaction.getTime()
+                    + "|" + transaction.getDescription() + "|" + transaction.getVendor() + "|"
+                    + transaction.getAmount());
+            bw.newLine();
+        }
+        // Catches issues writing to file
+        catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
         }
     }
 
