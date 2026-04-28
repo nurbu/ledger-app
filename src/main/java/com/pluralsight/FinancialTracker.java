@@ -53,11 +53,21 @@ public class FinancialTracker {
             String input = scanner.nextLine().trim();
 
             switch (input.toUpperCase()) {
-                case "D" -> addDeposit(scanner);
-                case "P" -> addPayment(scanner);
-                case "L" -> ledgerMenu(scanner);
-                case "X" -> running = false;
-                default -> System.out.println("Invalid option");
+                case "D":
+                    addDeposit(scanner);
+                    break;
+                case "P":
+                    addPayment(scanner);
+                    break;
+                case "L":
+                    ledgerMenu(scanner);
+                    break;
+                case "X":
+                    running = false;
+                    System.out.println("Thank you and Have a great day!");
+                    break;
+                default:
+                    System.out.println("Invalid option");
             }
         }
         scanner.close();
