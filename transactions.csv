@@ -14,3 +14,5 @@
 2026-04-22|02:05:05|testing month to date|tester|123.00
 2026-04-20|03:03:40|testing Payment month date|tester|-321.00
 2026-03-21|05:05:05|testing previous month payment|tester|-32.00
+2025-02-02|02:02:02|testing last year deposit|tester|21.00
+2025-02-02|02:02:02|testing previous year payment|tester|-20.00
