@@ -93,7 +93,7 @@ public class FinancialTracker {
                     LocalTime transactionTime = LocalTime.parse(values[1], TIME_FMT);
                     String transactionDescription = values[2];
                     String transactionVendor = values[3];
-                    double transactionAmount = Double.parseDouble(values[4]);
+                    double transactionAmount = parseDouble(values[4]);
 
                     transactions.add(new Transaction(transactionDate, transactionTime, transactionDescription, transactionVendor, transactionAmount));
                 }
@@ -382,7 +382,7 @@ public class FinancialTracker {
         System.out.println(SEPARATOR);
         for (Transaction transaction : transactions) {
             // Checks if transaction vendor matches specified vendor
-            if (transaction.getVendor().equals(vendor)) {
+            if (transaction.getVendor().equalsIgnoreCase(vendor)) {
                 System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
                         transaction.getDescription(), transaction.getVendor(),
                         transaction.getAmount());
@@ -547,7 +547,6 @@ public class FinancialTracker {
                 System.out.print("Invalid amount. Please enter a valid number.");
                 scanner.nextLine();
             }
-
         }
         return amount;
     }
