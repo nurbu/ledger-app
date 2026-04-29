@@ -323,14 +323,28 @@ public class FinancialTracker {
         System.out.print(HEADER);
         System.out.println(SEPARATOR);
         for (Transaction transaction : transactions) {
-            System.out.printf(TRANSACTION_FMT, transaction.getDate(), transaction.getTime(),
+            System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
                     transaction.getDescription(), transaction.getVendor(),
                     transaction.getAmount());
         }
+        System.out.println(SEPARATOR);
 
     }
 
-    private static void displayDeposits() { /* TODO – only amount > 0               */ }
+    private static void displayDeposits() { /* TODO – only amount > 0               */
+        System.out.println("All Deposits");
+        System.out.print(HEADER);
+        System.out.println(SEPARATOR);
+
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+                        transaction.getDescription(), transaction.getVendor(),
+                        transaction.getAmount());
+            }
+        }
+        System.out.println(SEPARATOR);
+    }
 
     private static void displayPayments() { /* TODO – only amount < 0               */ }
 
