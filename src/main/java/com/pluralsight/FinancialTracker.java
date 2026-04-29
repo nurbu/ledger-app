@@ -305,12 +305,24 @@ public class FinancialTracker {
             String input = scanner.nextLine().trim();
 
             switch (input.toUpperCase()) {
-                case "A" -> displayLedger();
-                case "D" -> displayDeposits();
-                case "P" -> displayPayments();
-                case "R" -> reportsMenu(scanner);
-                case "H" -> running = false;
-                default -> System.out.println("Invalid option");
+                case "A":
+                    displayLedger();
+                    break;
+                case "D":
+                    displayDeposits();
+                    break;
+                case "P":
+                    displayPayments();
+                    break;
+                case "R":
+                    reportsMenu(scanner);
+                    break;
+                case "H":
+                    running = false;
+                    System.out.println("Exiting Ledger");
+                    break;
+                default:
+                    System.out.println("Invalid option");
             }
         }
     }
