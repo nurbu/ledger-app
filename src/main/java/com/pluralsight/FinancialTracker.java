@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -529,9 +530,9 @@ public class FinancialTracker {
 
         System.out.println("Custom Search (leave field empty to skip)");
         System.out.print("Enter start date(yyyy-MM-dd): ");
-        startDate = LocalDate.parse(scanner.nextLine().trim());
+        startDate = parseDate(scanner.nextLine().trim());
         System.out.print("Enter end date(yyyy-MM-dd): ");
-        endDate = LocalDate.parse(scanner.nextLine().trim());
+        endDate = parseDate(scanner.nextLine().trim());
         System.out.print("Enter description: ");
         description = scanner.nextLine().toLowerCase().trim();
         System.out.print("Enter vendor: ");
@@ -578,8 +579,12 @@ public class FinancialTracker {
        Utility parsers (you can reuse in many places)
        ------------------------------------------------------------------ */
     private static LocalDate parseDate(String s) {
-        /* TODO – return LocalDate or null */
-        return null;
+        if (s.isEmpty()) return null;
+        try {
+            return LocalDate.parse(s, DATE_FMT);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 
     private static Double parseDouble(String s) {
