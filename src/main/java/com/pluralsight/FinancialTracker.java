@@ -261,7 +261,7 @@ public class FinancialTracker {
                         System.out.println("Please enter a positive amount");
                     }
                 } else {
-                    System.out.println("Invalid amount. Please enter a valid number.");
+                    System.out.print("Invalid amount. Please enter a valid number.");
                     scanner.nextLine();
                 }
 
