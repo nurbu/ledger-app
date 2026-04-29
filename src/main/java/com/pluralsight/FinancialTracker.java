@@ -414,8 +414,20 @@ public class FinancialTracker {
             String input = scanner.nextLine().trim();
 
             switch (input) {
-                case "1" -> {/* TODO – month-to-date report */ }
-                case "2" -> {/* TODO – previous month report */ }
+                case "1" -> {
+                    // Month to date transactions
+                    LocalDate today = LocalDate.now();
+                    LocalDate start = today.withDayOfMonth(1);
+                    System.out.println("All transactions month to date");
+                    filterTransactionsByDate(start, today);
+                }
+                case "2" -> {
+                    // Previous Month transactions
+                    LocalDate firstDayOfTheMonth = LocalDate.now().withDayOfMonth(1);
+                    LocalDate start = firstDayOfTheMonth.minusMonths(1);
+                    LocalDate end = firstDayOfTheMonth.minusDays(1);
+                    filterTransactionsByDate(start, end);
+                }
                 case "3" -> {/* TODO – year-to-date report   */ }
                 case "4" -> {/* TODO – previous year report  */ }
                 case "5" -> {/* TODO – prompt for vendor then report */ }
