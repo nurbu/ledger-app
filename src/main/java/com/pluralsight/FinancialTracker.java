@@ -438,11 +438,32 @@ public class FinancialTracker {
         }
     }
 
-    /* ------------------------------------------------------------------
-       Reporting helpers
-       ------------------------------------------------------------------ */
+    /**
+     * Filters and displays transactions that fall within the specified date range (inclusive)
+     * Prints a formatted table to standard output, or a "No transactions found" message
+     * if no transaction match the start and end criteria.
+     *
+     * @param start
+     * @param end
+     */
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
-        // TODO – iterate transactions, print those within the range
+        boolean foundTransactions = false;
+
+        System.out.println(HEADER);
+        System.out.println(SEPARATOR);
+        for (Transaction transaction : transactions) {
+            // Checks if transaction is within range of start and end (inclusively)
+            if (!transaction.getDate().isBefore(start) && !transaction.getDate().isAfter(end)) {
+                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+                        transaction.getDescription(), transaction.getVendor(),
+                        transaction.getAmount());
+                foundTransactions = true;
+            }
+        }
+        if (!foundTransactions) {
+            System.out.println("No transactions found");
+        }
+        System.out.println(SEPARATOR);
     }
 
     private static void filterTransactionsByVendor(String vendor) {
