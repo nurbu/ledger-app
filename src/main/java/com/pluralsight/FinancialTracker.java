@@ -554,7 +554,7 @@ public class FinancialTracker {
             if (!description.isEmpty() && !transaction.getDescription().toLowerCase().equals(description)) {
                 match = false;
             }
-            if (!vendor.isEmpty() && transaction.getVendor().toLowerCase().equals(vendor)) {
+            if (!vendor.isEmpty() && !transaction.getVendor().toLowerCase().equals(vendor)) {
                 match = false;
             }
             if (amount != 0.0 && transaction.getAmount() != amount) {
