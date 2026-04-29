@@ -461,6 +461,7 @@ public class FinancialTracker {
      * @param end
      */
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
+
         boolean foundTransactions = false;
 
         System.out.println(HEADER);
@@ -480,8 +481,29 @@ public class FinancialTracker {
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * Prints all transactions matching the specified vendor.
+     * If no matching vendors are found, prints "No transactions found" message.
+     *
+     * @param vendor
+     */
     private static void filterTransactionsByVendor(String vendor) {
-        // TODO – iterate transactions, print those with matching vendor
+        boolean foundTransactions = false;
+        System.out.println(HEADER);
+        System.out.println(SEPARATOR);
+        for (Transaction transaction : transactions) {
+            // Checks if transaction vendor matches specified vendor
+            if (transaction.getVendor().equals(vendor)) {
+                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+                        transaction.getDescription(), transaction.getVendor(),
+                        transaction.getAmount());
+                foundTransactions = true;
+            }
+        }
+        if (!foundTransactions) {
+            System.out.println("No transactions found");
+        }
+        System.out.println(SEPARATOR);
     }
 
     private static void customSearch(Scanner scanner) {
