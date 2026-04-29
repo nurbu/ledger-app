@@ -331,12 +331,18 @@ public class FinancialTracker {
 
     }
 
+    /**
+     * Displays Deposits
+     * Same for loop as displayLedger
+     * added if amount > 0 to only print deposits.
+     */
     private static void displayDeposits() { /* TODO – only amount > 0               */
         System.out.println("All Deposits");
         System.out.print(HEADER);
         System.out.println(SEPARATOR);
 
         for (Transaction transaction : transactions) {
+            // Checks transaction to see if deposit.
             if (transaction.getAmount() > 0) {
                 System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
                         transaction.getDescription(), transaction.getVendor(),
