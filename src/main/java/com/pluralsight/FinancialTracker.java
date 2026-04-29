@@ -538,7 +538,7 @@ public class FinancialTracker {
         System.out.print("Enter vendor: ");
         vendor = scanner.nextLine().toLowerCase().trim();
         System.out.print("Enter amount: ");
-        amount = Double.parseDouble(scanner.nextLine().trim());
+        amount = parseDouble(scanner.nextLine().trim());
 
         System.out.println(HEADER);
         System.out.println(SEPARATOR);
@@ -578,6 +578,12 @@ public class FinancialTracker {
     /* ------------------------------------------------------------------
        Utility parsers (you can reuse in many places)
        ------------------------------------------------------------------ */
+
+    /**
+     * Parse date string
+     * if string is empty (skipped by user)
+     * Uses try/catch to check if user input valid.
+     */
     private static LocalDate parseDate(String s) {
         if (s.isEmpty()) return null;
         try {
@@ -587,8 +593,17 @@ public class FinancialTracker {
         }
     }
 
+    /**
+     * Parse double string
+     * if string is empty (skipped by user)
+     * Uses try/catch to check if user input valid.
+     */
     private static Double parseDouble(String s) {
-        /* TODO – return Double   or null */
-        return null;
+        if (s.isEmpty()) return 0.0;
+        try {
+            return Double.parseDouble(s);
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
     }
 }
