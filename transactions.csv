@@ -16,3 +16,5 @@
 2026-03-21|05:05:05|testing previous month payment|tester|-32.00
 2025-02-02|02:02:02|testing last year deposit|tester|21.00
 2025-02-02|02:02:02|testing previous year payment|tester|-20.00
+2004-05-22|03:03:03|testing helper methods for addDeposit and addPayment|testing|34.00
+2026-03-22|03:03:03|testing|tesing|-23.00

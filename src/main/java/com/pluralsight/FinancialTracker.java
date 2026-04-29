@@ -11,19 +11,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 
-/*
- * Capstone skeleton – personal finance tracker.
- * ------------------------------------------------
- * File format  (pipe-delimited)
- *     yyyy-MM-dd|HH:mm:ss|description|vendor|amount
- * A deposit has a positive amount; a payment is stored
- * as a negative amount.
- */
+
 public class FinancialTracker {
 
-    /* ------------------------------------------------------------------
-       Shared data and formatters
-       ------------------------------------------------------------------ */
+
     private static final ArrayList<Transaction> transactions = new ArrayList<>();
     private static final String FILE_NAME = "transactions.csv";
 
@@ -38,9 +29,7 @@ public class FinancialTracker {
     private static final String SEPARATOR = "-".repeat(86);
     private static final String TRANSACTION_FMT = ("%-12s%-10s%-30s%-22s%10.2f%n");
 
-    /* ------------------------------------------------------------------
-       Main menu
-       ------------------------------------------------------------------ */
+
     public static void main(String[] args) {
         loadTransactions(FILE_NAME);
 
@@ -78,9 +67,6 @@ public class FinancialTracker {
         scanner.close();
     }
 
-    /* ------------------------------------------------------------------
-       File I/O
-       ------------------------------------------------------------------ */
 
     /**
      * Load transactions from FILE_NAME.
@@ -132,32 +118,13 @@ public class FinancialTracker {
         }
     }
 
-    /* ------------------------------------------------------------------
-       Add new transactions
-       ------------------------------------------------------------------ */
 
-    /**
-     * Prompt for ONE date+time string in the format
-     * "yyyy-MM-dd HH:mm:ss", plus description, vendor, amount.
-     * Validate that the amount entered is positive.
-     * Store the amount as-is (positive) and append to the file.
-     */
     private static void addDeposit(Scanner scanner) {
         boolean addMore = true;
         // Re-prompts the user to add more deposits
         while (addMore) {
             // Prompt and validate date time input
-            LocalDateTime dateTime = null;
-            boolean isValidDateTime = false;
-            while (!isValidDateTime) {
-                System.out.print("Enter date and time(yyyy-MM-dd HH:mm:ss): ");
-                try {
-                    dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATETIME_FMT);
-                    isValidDateTime = true;
-                } catch (DateTimeException e) {
-                    System.out.println("Invalid date and time. Please enter a valid date and time.");
-                }
-            }
+            LocalDateTime dateTime = promptDateTime(scanner);
 
             // Get description and vendor from user
             System.out.print("Enter a description: ");
@@ -166,24 +133,7 @@ public class FinancialTracker {
             String vendor = scanner.nextLine();
 
             // Prompts then validates deposit amount to be positive
-            double amount = 0;
-            boolean isValidAmount = false;
-            while (!isValidAmount) {
-                System.out.print("Enter deposit amount: ");
-                if (scanner.hasNextDouble()) {
-                    amount = scanner.nextDouble();
-                    scanner.nextLine();
-                    if (amount > 0) {
-                        isValidAmount = true;
-                    } else {
-                        System.out.println("Please enter a positive amount");
-                    }
-                } else {
-                    System.out.println("Invalid amount. Please enter a valid number.");
-                    scanner.nextLine();
-                }
-
-            }
+            double amount = promptPositiveAmount(scanner);
 
             // Splits dateTimes and adds the transaction to transactions ArrayList and transactions.csv.
             LocalDate date = dateTime.toLocalDate();
@@ -200,48 +150,13 @@ public class FinancialTracker {
         }
     }
 
-    /*
-    Appends a single transaction to transactions.csv
-    Format: date|time|description|vendor|amount
-     */
-    public static void appendTransactionToFile(Transaction transaction) {
-        // Uses a try-with-resources to auto close BufferWriter and appends transactions given to transactions.csv file
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-            // Formatted write
-            bw.write(String.format("%s|%s|%s|%s|%.2f", transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-                    transaction.getDescription(), transaction.getVendor(),
-                    transaction.getAmount()));
-            bw.newLine();
-        }
 
-        // Use format for appendTransition amount and date and Time
-        // Catches issues writing to file
-        catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
-        }
-    }
-
-    /**
-     * this
-     *
-     * @param scanner this  sss
-     */
     private static void addPayment(Scanner scanner) {
         boolean addMore = true;
         // Re-prompts the user to add more payments
         while (addMore) {
             // Prompt and validate date time input
-            LocalDateTime dateTime = null;
-            boolean isValidDateTime = false;
-            while (!isValidDateTime) {
-                System.out.print("Enter date and time(yyyy-MM-dd HH:mm:ss): ");
-                try {
-                    dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATETIME_FMT);
-                    isValidDateTime = true;
-                } catch (DateTimeException e) {
-                    System.out.println("Invalid date and time. Please enter a valid date and time.");
-                }
-            }
+            LocalDateTime dateTime = promptDateTime(scanner);
 // console color, animations ex: loading bar, etc...
             // Get description and vendor from user
             System.out.print("Enter a description: ");
@@ -250,24 +165,7 @@ public class FinancialTracker {
             String vendor = scanner.nextLine();
 
             // Prompts then validates payment amount to be positive
-            double amount = 0;
-            boolean isValidAmount = false;
-            while (!isValidAmount) {
-                System.out.print("Enter deposit amount: ");
-                if (scanner.hasNextDouble()) {
-                    amount = scanner.nextDouble();
-                    scanner.nextLine();
-                    if (amount > 0) {
-                        isValidAmount = true;
-                    } else {
-                        System.out.println("Please enter a positive amount");
-                    }
-                } else {
-                    System.out.print("Invalid amount. Please enter a valid number.");
-                    scanner.nextLine();
-                }
-
-            }
+            double amount = promptPositiveAmount(scanner);
 
             // Splits dateTimes and adds the transaction to transactions ArrayList and transactions.csv.
             LocalDate date = dateTime.toLocalDate();
@@ -285,9 +183,7 @@ public class FinancialTracker {
         }
     }
 
-    /* ------------------------------------------------------------------
-       Ledger menu
-       ------------------------------------------------------------------ */
+
     private static void ledgerMenu(Scanner scanner) {
 
         // Sorts transactions every time ledger Menu called.
@@ -329,9 +225,6 @@ public class FinancialTracker {
         }
     }
 
-    /* ------------------------------------------------------------------
-       Display helpers: show data in neat columns
-       ------------------------------------------------------------------ */
     private static void displayLedger() { /* TODO – print all transactions in column format */
         System.out.println("All Transactions");
         System.out.print(HEADER);
@@ -397,9 +290,6 @@ public class FinancialTracker {
         System.out.println(SEPARATOR);
     }
 
-    /* ------------------------------------------------------------------
-       Reports menu
-       ------------------------------------------------------------------ */
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
@@ -598,5 +488,75 @@ public class FinancialTracker {
         } catch (NumberFormatException e) {
             return 0.0;
         }
+    }
+
+    /*
+    Appends a single transaction to transactions.csv
+    Format: date|time|description|vendor|amount
+     */
+    public static void appendTransactionToFile(Transaction transaction) {
+        // Uses a try-with-resources to auto close BufferWriter and appends transactions given to transactions.csv file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+            // Formatted write
+            bw.write(String.format("%s|%s|%s|%s|%.2f", transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+                    transaction.getDescription(), transaction.getVendor(),
+                    transaction.getAmount()));
+            bw.newLine();
+        }
+
+        // Use format for appendTransition amount and date and Time
+        // Catches issues writing to file
+        catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Prompts for a date and time in yyyy-MM-dd HH:mm:ss formats and re-prompts
+     * until the user inputs a properly formatted date and time
+     *
+     * @return the parsed LocalDateTime
+     */
+
+    public static LocalDateTime promptDateTime(Scanner scanner) {
+        LocalDateTime dateTime = null;
+        boolean isValidDateTime = false;
+        while (!isValidDateTime) {
+            System.out.print("Enter date and time(yyyy-MM-dd HH:mm:ss): ");
+            try {
+                dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATETIME_FMT);
+                isValidDateTime = true;
+            } catch (DateTimeException e) {
+                System.out.println("Invalid date and time. Please enter a valid date and time.");
+            }
+        }
+        return dateTime;
+    }
+
+    /**
+     * Prompts for a positive amount and re-prompts until input is valid.
+     *
+     * @return a positive amount entered by user
+     */
+    public static double promptPositiveAmount(Scanner scanner) {
+        double amount = 0;
+        boolean isValidAmount = false;
+        while (!isValidAmount) {
+            System.out.print("Enter deposit amount: ");
+            if (scanner.hasNextDouble()) {
+                amount = scanner.nextDouble();
+                scanner.nextLine();
+                if (amount > 0) {
+                    isValidAmount = true;
+                } else {
+                    System.out.println("Please enter a positive amount");
+                }
+            } else {
+                System.out.print("Invalid amount. Please enter a valid number.");
+                scanner.nextLine();
+            }
+
+        }
+        return amount;
     }
 }
