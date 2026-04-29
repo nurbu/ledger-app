@@ -534,7 +534,7 @@ public class FinancialTracker {
         double amount = 0;
         boolean isValidAmount = false;
         while (!isValidAmount) {
-            System.out.print("Enter deposit amount: ");
+            System.out.print("Enter amount: ");
             if (scanner.hasNextDouble()) {
                 amount = scanner.nextDouble();
                 scanner.nextLine();
