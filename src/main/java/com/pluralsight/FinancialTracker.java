@@ -567,6 +567,9 @@ public class FinancialTracker {
                 foundTransactions = true;
             }
         }
+        if (!foundTransactions) {
+            System.out.println("No transactions found");
+        }
         System.out.println(SEPARATOR);
 
     }
