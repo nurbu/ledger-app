@@ -444,7 +444,12 @@ public class FinancialTracker {
                     System.out.println("All transactions from previous year");
                     filterTransactionsByDate(start, end);
                 }
-                case "5" -> {/* TODO – prompt for vendor then report */ }
+                case "5" -> {
+                    // Search by vendor
+                    System.out.print("Enter vendor: ");
+                    String vendor = scanner.nextLine().trim();
+                    filterTransactionsByVendor(vendor);
+                }
                 case "6" -> customSearch(scanner);
                 case "0" -> running = false;
                 default -> System.out.println("Invalid option");
@@ -489,6 +494,7 @@ public class FinancialTracker {
      */
     private static void filterTransactionsByVendor(String vendor) {
         boolean foundTransactions = false;
+        System.out.println(vendor + " Transactions");
         System.out.println(HEADER);
         System.out.println(SEPARATOR);
         for (Transaction transaction : transactions) {
