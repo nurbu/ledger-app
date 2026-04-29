@@ -10,3 +10,7 @@
 2026-04-22|02:02:02|hello|ello|21.10
 2004-04-22|04:04:04|Birthday|mom|100.00
 2004-01-22|03:03:03|nothing|nothing|-31.00
+2026-03-22|03:03:03|testing Previous month|tester|201.00
+2026-04-22|02:05:05|testing month to date|tester|123.00
+2026-04-20|03:03:40|testing Payment month date|tester|-321.00
+2026-03-21|05:05:05|testing previous month payment|tester|-32.00

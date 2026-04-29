@@ -244,7 +244,7 @@ public class FinancialTracker {
             // Get description and vendor from user
             System.out.print("Enter a description: ");
             String description = scanner.nextLine();
-            System.out.print("\nEnter a vendor: ");
+            System.out.print("Enter a vendor: ");
             String vendor = scanner.nextLine();
 
             // Prompts then validates payment amount to be positive
