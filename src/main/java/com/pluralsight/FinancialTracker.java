@@ -337,22 +337,51 @@ public class FinancialTracker {
      * added if amount > 0 to only print deposits.
      */
     private static void displayDeposits() { /* TODO – only amount > 0               */
+        boolean foundDeposits = false;
         System.out.println("All Deposits");
         System.out.print(HEADER);
         System.out.println(SEPARATOR);
 
         for (Transaction transaction : transactions) {
-            // Checks transaction to see if deposit.
+            // Checks transaction to see if Deposit.
             if (transaction.getAmount() > 0) {
                 System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
                         transaction.getDescription(), transaction.getVendor(),
                         transaction.getAmount());
+                foundDeposits = true;
             }
+        }
+        if (!foundDeposits) {
+            System.out.println("No deposits found");
         }
         System.out.println(SEPARATOR);
     }
 
-    private static void displayPayments() { /* TODO – only amount < 0               */ }
+    /**
+     * Displays Deposits
+     * Same for loop as displayLedger
+     * added if amount < 0 to only print deposits.
+     */
+    private static void displayPayments() { /* TODO – only amount < 0               */
+        boolean foundPayments = false;
+        System.out.println("All Payments");
+        System.out.print(HEADER);
+        System.out.println(SEPARATOR);
+
+        for (Transaction transaction : transactions) {
+            // Checks transaction to see if Payment.
+            if (transaction.getAmount() < 0) {
+                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+                        transaction.getDescription(), transaction.getVendor(),
+                        transaction.getAmount());
+                foundPayments = true;
+            }
+        }
+        if (!foundPayments) {
+            System.out.println("No payments found");
+        }
+        System.out.println(SEPARATOR);
+    }
 
     /* ------------------------------------------------------------------
        Reports menu
