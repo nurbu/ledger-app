@@ -33,9 +33,9 @@ public class FinancialTracker {
     private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern(DATE_PATTERN);
     private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern(TIME_PATTERN);
     private static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
-    private static final String HEADER = String.format("%-12%-10s%-22s%-22%10s%n", "Date", "Time", "Description", "Vendor", "Amount");
-    private static final String SEPARATOR = "-".repeat(76);
-    private static final String TRANSACTION_FMT = ("%-12%-10s%-22s%-22%10s%n");
+    private static final String HEADER = String.format("%-12s%-10s%-30s%-22s%10s%n", "Date", "Time", "Description", "Vendor", "Amount");
+    private static final String SEPARATOR = "-".repeat(86);
+    private static final String TRANSACTION_FMT = ("%-12s%-10s%-30s%-22s%10.2f%n");
 
     /* ------------------------------------------------------------------
        Main menu
@@ -160,7 +160,7 @@ public class FinancialTracker {
             // Get description and vendor from user
             System.out.print("Enter a description: ");
             String description = scanner.nextLine();
-            System.out.print("\nEnter a vendor: ");
+            System.out.print("Enter a vendor: ");
             String vendor = scanner.nextLine();
 
             // Prompts then validates deposit amount to be positive
@@ -206,7 +206,7 @@ public class FinancialTracker {
         // Uses a try-with-resources to auto close BufferWriter and appends transactions given to transactions.csv file
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             // Formatted write
-            bw.write(String.format("%s|%s|%s|%s|%0.2f", transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+            bw.write(String.format("%s|%s|%s|%s|%.2f", transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
                     transaction.getDescription(), transaction.getVendor(),
                     transaction.getAmount()));
             bw.newLine();
@@ -320,9 +320,12 @@ public class FinancialTracker {
        ------------------------------------------------------------------ */
     private static void displayLedger() { /* TODO – print all transactions in column format */
         System.out.println("All Transactions");
-
+        System.out.print(HEADER);
+        System.out.println(SEPARATOR);
         for (Transaction transaction : transactions) {
-            System.out.println(transaction);
+            System.out.printf(TRANSACTION_FMT, transaction.getDate(), transaction.getTime(),
+                    transaction.getDescription(), transaction.getVendor(),
+                    transaction.getAmount());
         }
 
     }
