@@ -72,7 +72,7 @@ public class Transaction {
      */
     @Override
     public String toString() {
-        return date + " " + time + " " + description + " " + vendor + " " + amount;
+        return ("%-12s%-10s%-22s%-22s%10.2f",date)
     }
 
 }

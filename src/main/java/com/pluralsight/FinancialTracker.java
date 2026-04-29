@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /*
@@ -32,6 +33,9 @@ public class FinancialTracker {
     private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern(DATE_PATTERN);
     private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern(TIME_PATTERN);
     private static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
+    private static final String HEADER = String.format("%-12%-10s%-22s%-22%10s%n", "Date", "Time", "Description", "Vendor", "Amount");
+    private static final String SEPARATOR = "-".repeat(76);
+    private static final String TRANSACTION_FMT = ("%-12%-10s%-22s%-22%10s%n");
 
     /* ------------------------------------------------------------------
        Main menu
@@ -146,7 +150,7 @@ public class FinancialTracker {
             while (!isValidDateTime) {
                 System.out.print("Enter date and time(yyyy-MM-dd HH:mm:ss): ");
                 try {
-                    dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATE_FMT);
+                    dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATETIME_FMT);
                     isValidDateTime = true;
                 } catch (DateTimeException e) {
                     System.out.println("Invalid date and time. Please enter a valid date and time.");
@@ -202,11 +206,13 @@ public class FinancialTracker {
         // Uses a try-with-resources to auto close BufferWriter and appends transactions given to transactions.csv file
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             // Formatted write
-            bw.write(transaction.getDate() + "|" + transaction.getTime()
-                    + "|" + transaction.getDescription() + "|" + transaction.getVendor() + "|"
-                    + transaction.getAmount());
+            bw.write(String.format("%s|%s|%s|%s|%0.2f", transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+                    transaction.getDescription(), transaction.getVendor(),
+                    transaction.getAmount()));
             bw.newLine();
         }
+
+        // Use format for appendTransition amount and date and Time
         // Catches issues writing to file
         catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
@@ -214,9 +220,9 @@ public class FinancialTracker {
     }
 
     /**
-     * Same prompts as addDeposit.
-     * Amount must be entered as a positive number,
-     * then converted to a negative amount before storing.
+     * this
+     *
+     * @param scanner this  sss
      */
     private static void addPayment(Scanner scanner) {
         boolean addMore = true;
@@ -228,13 +234,13 @@ public class FinancialTracker {
             while (!isValidDateTime) {
                 System.out.print("Enter date and time(yyyy-MM-dd HH:mm:ss): ");
                 try {
-                    dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATE_FMT);
+                    dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATETIME_FMT);
                     isValidDateTime = true;
                 } catch (DateTimeException e) {
                     System.out.println("Invalid date and time. Please enter a valid date and time.");
                 }
             }
-
+// console color, animations ex: loading bar, etc...
             // Get description and vendor from user
             System.out.print("Enter a description: ");
             String description = scanner.nextLine();
@@ -260,12 +266,12 @@ public class FinancialTracker {
                 }
 
             }
-            // Changes amount to negative
-            amount *= -1;
+
             // Splits dateTimes and adds the transaction to transactions ArrayList and transactions.csv.
             LocalDate date = dateTime.toLocalDate();
             LocalTime time = dateTime.toLocalTime();
-            Transaction newTransaction = new Transaction(date, time, description, vendor, amount);
+            // Changed amount to negative
+            Transaction newTransaction = new Transaction(date, time, description, vendor, -amount);
             transactions.add(newTransaction);
             appendTransactionToFile(newTransaction);
             System.out.println("Transaction added successfully.");
@@ -281,6 +287,11 @@ public class FinancialTracker {
        Ledger menu
        ------------------------------------------------------------------ */
     private static void ledgerMenu(Scanner scanner) {
+
+        // Sorts transactions every time ledger Menu called.
+        transactions.sort(Comparator.comparing(Transaction::getDate)
+                .thenComparing(Transaction::getTime).reversed());
+
         boolean running = true;
         while (running) {
             System.out.println("Ledger");
@@ -307,7 +318,14 @@ public class FinancialTracker {
     /* ------------------------------------------------------------------
        Display helpers: show data in neat columns
        ------------------------------------------------------------------ */
-    private static void displayLedger() { /* TODO – print all transactions in column format */ }
+    private static void displayLedger() { /* TODO – print all transactions in column format */
+        System.out.println("All Transactions");
+
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
+        }
+
+    }
 
     private static void displayDeposits() { /* TODO – only amount > 0               */ }
 
