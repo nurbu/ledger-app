@@ -95,8 +95,9 @@ public class FinancialTracker {
         if (!file.exists()) {
             try {
                 // Creates new "transactions.csv" and lets user know.
-                file.createNewFile();
-                System.out.println("New \"transactions.csv\" file created");
+                if (file.createNewFile()) {
+                    System.out.println("New \"transactions.csv\" file created");
+                }
             } catch (IOException e) {
                 // Catches any errors when creating file.
                 System.out.println("Error creating file: " + e.getMessage());
@@ -193,7 +194,7 @@ public class FinancialTracker {
             System.out.println("Transaction added successfully.");
             System.out.println("Would you like to add another deposit? (Y/N)");
             String input = scanner.nextLine().trim();
-            if (input.toUpperCase().equals("N")) {
+            if (input.equalsIgnoreCase("N")) {
                 addMore = false;
             }
         }
@@ -278,7 +279,7 @@ public class FinancialTracker {
             System.out.println("Transaction added successfully.");
             System.out.println("Would you like to add another payment? (Y/N)");
             String input = scanner.nextLine().trim();
-            if (input.toUpperCase().equals("N")) {
+            if (input.equalsIgnoreCase("N")) {
                 addMore = false;
             }
         }
@@ -462,9 +463,6 @@ public class FinancialTracker {
      * Filters and displays transactions that fall within the specified date range (inclusive)
      * Prints a formatted table to standard output, or a "No transactions found" message
      * if no transaction match the start and end criteria.
-     *
-     * @param start
-     * @param end
      */
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
 
@@ -490,8 +488,6 @@ public class FinancialTracker {
     /**
      * Prints all transactions matching the specified vendor.
      * If no matching vendors are found, prints "No transactions found" message.
-     *
-     * @param vendor
      */
     private static void filterTransactionsByVendor(String vendor) {
         boolean foundTransactions = false;
@@ -516,17 +512,15 @@ public class FinancialTracker {
     /**
      * Lets user search transactions with multiple criteria
      * Any field skipped is left empty, null or 0.0 for amount and later skipped when finding matches.
-     *
-     * @param scanner
      */
     private static void customSearch(Scanner scanner) {
 
         boolean foundTransactions = false;
-        LocalDate startDate = null;
-        LocalDate endDate = null;
-        String description = "";
-        String vendor = "";
-        double amount = 0.0;
+        LocalDate startDate;
+        LocalDate endDate;
+        String description;
+        String vendor;
+        double amount;
 
         System.out.println("Custom Search (leave field empty to skip)");
         System.out.print("Enter start date(yyyy-MM-dd): ");
@@ -545,28 +539,27 @@ public class FinancialTracker {
 
         // Checks if skipped by user and criteria doesn't match for each filter and for each transaction.
         for (Transaction transaction : transactions) {
-            boolean match = true;
+
             if (startDate != null && transaction.getDate().isBefore(startDate)) {
-                match = false;
+                continue;
             }
             if (endDate != null && transaction.getDate().isAfter(endDate)) {
-                match = false;
+                continue;
             }
             if (!description.isEmpty() && !transaction.getDescription().toLowerCase().equals(description)) {
-                match = false;
+                continue;
             }
             if (!vendor.isEmpty() && !transaction.getVendor().toLowerCase().equals(vendor)) {
-                match = false;
+                continue;
             }
             if (amount != 0.0 && transaction.getAmount() != amount) {
-                match = false;
+                continue;
             }
-            if (match) {
-                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-                        transaction.getDescription(), transaction.getVendor(),
-                        transaction.getAmount());
-                foundTransactions = true;
-            }
+
+            System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+                    transaction.getDescription(), transaction.getVendor(),
+                    transaction.getAmount());
+            foundTransactions = true;
         }
         if (!foundTransactions) {
             System.out.println("No transactions found");
