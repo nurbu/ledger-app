@@ -2,32 +2,34 @@ package com.pluralsight;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.shape.Circle;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Controller {
 
     @FXML
-    private Circle myCircle;
-    private double x;
-    private double y;
+    private Button logoutButton;
+    @FXML
+    private AnchorPane scenePane;
 
-    public void up(ActionEvent e) {
-        System.out.println("UP");
-        myCircle.setCenterY(y -= 10);
-    }
+    Stage stage;
 
-    public void down(ActionEvent e) {
-        System.out.println("DOWN");
-        myCircle.setCenterY(y += 10);
-    }
+    public void logout(ActionEvent event) throws IOException {
 
-    public void right(ActionEvent e) {
-        System.out.println("RIGHT");
-        myCircle.setCenterX(x += 10);
-    }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("You're about to logout");
+        alert.setContentText("Have a great a day!");
 
-    public void left(ActionEvent e) {
-        System.out.println("LEFT");
-        myCircle.setCenterX(x -= 10);
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            stage = (Stage) scenePane.getScene().getWindow();
+            System.out.println("You have successfully logged out");
+            stage.close();
+        }
     }
 }
