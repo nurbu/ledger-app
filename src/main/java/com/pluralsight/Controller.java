@@ -3,17 +3,18 @@ package com.pluralsight;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Controller {
-
-    @FXML
-    private Button logoutButton;
     @FXML
     private AnchorPane scenePane;
 
@@ -31,5 +32,34 @@ public class Controller {
             System.out.println("You have successfully logged out");
             stage.close();
         }
+    }
+
+
+    public void displayTransaction(ActionEvent event) throws IOException {
+        // Created the columns for the column view
+        Stage stage = new Stage();
+
+        TableColumn<Transaction, LocalDate> dateCol = new TableColumn<>("Date");
+        dateCol.setMinWidth(200);
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        TableColumn<Transaction, LocalTime> timeCol = new TableColumn<>("Time");
+        timeCol.setMinWidth(200);
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("Time"));
+
+        TableColumn<Transaction, String> description = new TableColumn<>("Description");
+        description.setMinWidth(200);
+        description.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        TableColumn<Transaction, String> vendor = new TableColumn<>("Vendor");
+        vendor.setMinWidth(200);
+        vendor.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        TableColumn<Transaction, Double> amount = new TableColumn<>("Amount");
+        amount.setMinWidth(200);
+        amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+        TableView<Transaction> table;
+
     }
 }
