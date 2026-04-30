@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
@@ -18,12 +17,12 @@ public class HelloFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // Similar to div can only have 1 in java.
-        Parent root = FXMLLoader.load(getClass().getResource("/Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Page1.fxml"));
 
         // similar to HTML doc
-        Scene scene = new Scene(root, Color.WHITE);
-        String css = this.getClass().getResource("/application.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        Scene scene = new Scene(root);
+
+        
         Line line = new Line();
 
         // Window
