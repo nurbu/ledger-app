@@ -1,9 +1,8 @@
 package com.pluralsight.Controllers;
 
+import com.pluralsight.util.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -26,39 +25,33 @@ public class HomeScreenButtonsController {
 
 
     public void switchToAddDeposit(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/AddDeposit.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        SceneSwitcher.SceneSwitcher(event, "/AddDeposit.fxml");
     }
 
     public void switchToAddPayment(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/AddPayment.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        SceneSwitcher.SceneSwitcher(event, "/AddPayment.fxml");
     }
 
     public void switchToLedgerMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/LedgerMenu.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        SceneSwitcher.SceneSwitcher(event, "/LedgerMenu.fxml");
     }
 
+    /**
+     * Closes out application
+     * Confirmation alert included
+     *
+     * @param event Button clicked
+     */
     public void exit(ActionEvent event) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("You're about to logout");
-        alert.setContentText("Have a great a day!");
+        alert.setTitle("Exit Application");
+        alert.setHeaderText("Have a great a day!");
+
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             stage = (Stage) scenePane.getScene().getWindow();
-            System.out.println("You have successfully logged out");
+            System.out.println("You have successfully exited ledger!");
             stage.close();
         }
     }

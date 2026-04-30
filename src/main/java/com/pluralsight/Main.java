@@ -42,12 +42,11 @@ public class Main extends Application {
     public void logout(Stage stage) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText("You're about to logout");
-        alert.setContentText("Have a great a day!");
+        alert.setTitle("Exit Application");
+        alert.setHeaderText("Have a great a day!");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            System.out.println("You have successfully logged out");
+            System.out.println("You have successfully exited ledger!");
             stage.close();
         }
     }
