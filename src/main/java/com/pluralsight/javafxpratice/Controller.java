@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.javafxpratice;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

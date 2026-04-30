@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.javafxpratice;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

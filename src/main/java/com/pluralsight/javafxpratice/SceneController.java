@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.javafxpratice;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,7 @@ public class SceneController {
     private Parent root;
 
     public void switchToPage1(ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/Page1.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/javafxpratice/Page1.fxml"));
         stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -23,7 +23,7 @@ public class SceneController {
     }
 
     public void switchToPage2(ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/Page2.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/javafxpratice/Page2.fxml"));
         stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

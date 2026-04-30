@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.javafxpratice;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,16 +19,19 @@ public class HelloFX extends Application {
     public void start(Stage stage) {
         try {
             // Similar to div can only have 1 in java.
-            Parent root = FXMLLoader.load(getClass().getResource("/Page1.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen.fxml"));
 
             // similar to HTML doc
             Scene scene = new Scene(root);
 
             // Window
-            stage.setTitle("First JavaFX project");
+            stage.setTitle("Ledger");
             stage.setScene(scene);
             stage.show();
-            stage.setOnCloseRequest(event -> logout(stage));
+            stage.setOnCloseRequest(event -> {
+                event.consume();
+                logout(stage);
+            });
 
 
         } catch (Exception e) {

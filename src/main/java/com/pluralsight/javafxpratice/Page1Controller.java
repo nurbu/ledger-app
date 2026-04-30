@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.javafxpratice;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,12 +24,12 @@ public class Page1Controller {
 
         String username = textField.getText();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Page2.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxpratice/Page2.fxml"));
 
         root = loader.load();
 
         Page2Controller controller = loader.getController();
-        
+
         controller.displayName(username);
 
 
