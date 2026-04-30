@@ -7,22 +7,23 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * HomeScreen Router
+ */
 public class HomeScreenButtonsController {
-    @FXML
-    private Button exitButton;
     @FXML
     private AnchorPane scenePane;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
+
 
     public void switchToAddDeposit(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/AddDeposit.fxml"));
