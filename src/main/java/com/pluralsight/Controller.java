@@ -2,6 +2,8 @@ package com.pluralsight;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
@@ -17,6 +19,7 @@ import java.time.LocalTime;
 public class Controller {
     @FXML
     private AnchorPane scenePane;
+    TransactionData data = new TransactionData();
 
     Stage stage;
 
@@ -38,6 +41,8 @@ public class Controller {
     public void displayTransaction(ActionEvent event) throws IOException {
         // Created the columns for the column view
         Stage stage = new Stage();
+        Group root = new Group();
+
 
         TableColumn<Transaction, LocalDate> dateCol = new TableColumn<>("Date");
         dateCol.setMinWidth(200);
@@ -59,7 +64,14 @@ public class Controller {
         amount.setMinWidth(200);
         amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
-        TableView<Transaction> table;
+        TableView<Transaction> table = new TableView<>();
+
+        table.getColumns().addAll(dateCol, timeCol, description, vendor, amount);
+        root.getChildren().add(table);
+        table.setItems(data.getTransaction());
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
     }
 }

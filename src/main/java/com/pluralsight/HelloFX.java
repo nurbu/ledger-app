@@ -17,10 +17,11 @@ public class HelloFX extends Application {
 
     @Override
     public void start(Stage stage) {
+        TransactionData data = new TransactionData();
         try {
             // Similar to div can only have 1 in java.
             Parent root = FXMLLoader.load(getClass().getResource("/Page1.fxml"));
-
+            data.loadTransactions("transactions.csv");
             // similar to HTML doc
             Scene scene = new Scene(root);
 

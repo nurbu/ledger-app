@@ -30,7 +30,7 @@ public class TransactionData {
     private static final String TRANSACTION_FMT = ("%-12s%-10s%-30s%-22s%10.2f%n");
 
     public static void main(String[] args) {
-        loadTransactions(FILE_NAME);
+
     }
 
     /**
@@ -178,6 +178,10 @@ public class TransactionData {
             }
         }
         return amount;
+    }
+
+    public ObservableList<Transaction> getTransaction() {
+        return transactions;
     }
 }
 
