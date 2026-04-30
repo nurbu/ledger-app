@@ -4,7 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.shape.Line;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 public class HelloFX extends Application {
@@ -15,19 +16,37 @@ public class HelloFX extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        // Similar to div can only have 1 in java.
-        Parent root = FXMLLoader.load(getClass().getResource("/Page1.fxml"));
+    public void start(Stage stage) {
+        try {
+            // Similar to div can only have 1 in java.
+            Parent root = FXMLLoader.load(getClass().getResource("/Page1.fxml"));
 
-        // similar to HTML doc
-        Scene scene = new Scene(root);
+            // similar to HTML doc
+            Scene scene = new Scene(root);
 
-        
-        Line line = new Line();
+            // Window
+            stage.setTitle("First JavaFX project");
+            stage.setScene(scene);
+            stage.show();
+            stage.setOnCloseRequest(event -> logout(stage));
 
-        // Window
-        stage.setTitle("First JavaFX project");
-        stage.setScene(scene);
-        stage.show();
+
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+        }
     }
+
+    public void logout(Stage stage) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("You're about to logout");
+        alert.setContentText("Have a great a day!");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            System.out.println("You have successfully logged out");
+            stage.close();
+        }
+    }
+
 }
