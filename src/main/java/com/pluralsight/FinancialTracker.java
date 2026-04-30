@@ -429,7 +429,7 @@ public class FinancialTracker {
             if (startDate != null && transaction.getDate().isBefore(startDate)) {
                 continue;
             }
-            if (endDate != null && transaction.getDate().isAfter(endDate)) {
+            if (endDate != null && transaction.getDate().isAfter(endDate.plusDays(1))) {
                 continue;
             }
             if (!description.isEmpty() && !transaction.getDescription().toLowerCase().equals(description)) {
