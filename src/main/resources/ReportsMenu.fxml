@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.pluralsight.Controllers.ReportsMenuButtonsController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pluralsight.Controllers.ReportsMenuButtonsController">
+    <children>
+        <Button layoutX="243.0" layoutY="190.0" mnemonicParsing="false" text="Display Payments"/>
+        <Button layoutX="245.0" layoutY="131.0" mnemonicParsing="false" text="Display Deposits"/>
+        <Button layoutX="243.0" layoutY="81.0" mnemonicParsing="false" text="Display Ledger"/>
+        <Button layoutX="244.0" layoutY="247.0" mnemonicParsing="false" text="Reports Menu"/>
+        <Button layoutX="245.0" layoutY="313.0" mnemonicParsing="false" text="Back to Home Screen"/>
+        <Label layoutX="241.0" layoutY="11.0" prefHeight="27.0" prefWidth="81.0" text="Ledger Menu"/>
+        <Label layoutX="234.0" layoutY="48.0" text="Choose an option"/>
+    </children>
 </AnchorPane>

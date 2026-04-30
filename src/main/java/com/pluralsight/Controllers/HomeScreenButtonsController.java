@@ -25,7 +25,7 @@ public class HomeScreenButtonsController {
     private Parent root;
 
     public void switchToAddDeposit(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddDeposit.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/AddDeposit.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -33,7 +33,7 @@ public class HomeScreenButtonsController {
     }
 
     public void switchToAddPayment(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddPayment.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/AddPayment.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -41,7 +41,7 @@ public class HomeScreenButtonsController {
     }
 
     public void switchToLedgerMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("LedgerMenu.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/LedgerMenu.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
