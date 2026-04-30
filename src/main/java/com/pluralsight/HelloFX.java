@@ -22,7 +22,8 @@ public class HelloFX extends Application {
 
         // similar to HTML doc
         Scene scene = new Scene(root, Color.WHITE);
-
+        String css = this.getClass().getResource("/application.css").toExternalForm();
+        scene.getStylesheets().add(css);
         Line line = new Line();
 
         // Window
