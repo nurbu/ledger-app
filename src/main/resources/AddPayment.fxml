@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pluralsight.Controllers.AddController">
+    <children>
+        <Button layoutX="259.0" layoutY="288.0" mnemonicParsing="false" onAction="#submitButton" text="Submit"/>
+        <Label layoutX="156.0" layoutY="14.0" prefHeight="49.0" prefWidth="289.0" text="Enter Details of Payment">
+            <font>
+                <Font size="28.0"/>
+            </font>
+        </Label>
+        <Label layoutX="14.0" layoutY="92.0" text="Enter Date and Time (yyyy-MM-dd HH:mm:ss): "/>
+        <TextField fx:id="dateAndTimeField" layoutX="273.0" layoutY="88.0" promptText="2026-04-22"/>
+        <Label layoutX="14.0" layoutY="127.0" text="Enter a description: "/>
+        <Label layoutX="14.0" layoutY="168.0" text="Enter a vendor: "/>
+        <Label layoutX="14.0" layoutY="210.0" text="Enter amount (Above 0): "/>
+        <TextField fx:id="descriptionField" layoutX="126.0" layoutY="123.0" promptText="Paycheck"/>
+        <TextField fx:id="vendorField" layoutX="104.0" layoutY="164.0" promptText="Amazon"/>
+        <TextField fx:id="amountField" layoutX="156.0" layoutY="206.0" promptText="1"/>
+    </children>
+</AnchorPane>
