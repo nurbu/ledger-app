@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.pluralsight.Controllers.ReportsMenuButtonsController">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pluralsight.Controllers.ReportsMenuButtonsController">
     <children>
-        <Button layoutX="243.0" layoutY="190.0" mnemonicParsing="false" text="Display Payments"/>
-        <Button layoutX="245.0" layoutY="131.0" mnemonicParsing="false" text="Display Deposits"/>
-        <Button layoutX="243.0" layoutY="81.0" mnemonicParsing="false" text="Display Ledger"/>
-        <Button layoutX="244.0" layoutY="247.0" mnemonicParsing="false" text="Reports Menu"/>
-        <Button layoutX="245.0" layoutY="313.0" mnemonicParsing="false" text="Back to Home Screen"/>
-        <Label layoutX="241.0" layoutY="11.0" prefHeight="27.0" prefWidth="81.0" text="Ledger Menu"/>
-        <Label layoutX="234.0" layoutY="48.0" text="Choose an option"/>
-        <Button fx:id="returnHome" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" onAction="#returnLedgerMenu"
-                text="Return to Ledger Menu"/>
+        <Button layoutX="300.0" layoutY="92.0" mnemonicParsing="false" onAction="#monthToDate" text="Month to Date" />
+        <Button layoutX="167.0" layoutY="92.0" mnemonicParsing="false" onAction="#previousMonth" text="Previous Month" />
+        <Button layoutX="39.0" layoutY="92.0" mnemonicParsing="false" onAction="#yearToDate" text="Year to Date" />
+        <Button layoutX="432.0" layoutY="92.0" mnemonicParsing="false" onAction="#previousYear" text="Previous Year" />
+        <Button layoutX="213.0" layoutY="144.0" mnemonicParsing="false" onAction="#filterTransactionsByVendor" text="Search by Vendor" />
+        <Label layoutX="241.0" layoutY="11.0" prefHeight="27.0" prefWidth="81.0" text="Ledger Menu" />
+        <Label layoutX="234.0" layoutY="48.0" text="Choose an option" />
+        <Button fx:id="returnHome" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" onAction="#returnLedgerMenu" text="Return to Ledger Menu" />
+      <TextField fx:id="vendorFilter" layoutX="30.0" layoutY="144.0" promptText="Amazon" />
+      <TextField fx:id="dateCustomSearch" layoutX="14.0" layoutY="240.0" promptText="2026-04-22" />
+      <TextField fx:id="timeCustomSearch" layoutX="191.0" layoutY="240.0" promptText="04:04:04" />
+      <TextField fx:id="descriptionCustomSearch" layoutX="364.0" layoutY="240.0" promptText="For me" />
+      <TextField fx:id="vendorCustomSearch" layoutX="14.0" layoutY="284.0" promptText="Amazon" />
+      <TextField fx:id="amountCustomSearch" layoutX="191.0" layoutY="284.0" promptText="25" />
+      <Button layoutX="378.0" layoutY="284.0" mnemonicParsing="false" onAction="#customeSearch" text="Custome Search" />
     </children>
 </AnchorPane>
