@@ -1,6 +1,6 @@
 package com.pluralsight.Controllers;
 
-import com.pluralsight.IOExceptionHandler;
+import com.pluralsight.util.IOExceptionHandler;
 import com.pluralsight.util.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

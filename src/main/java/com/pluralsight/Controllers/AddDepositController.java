@@ -1,8 +1,8 @@
 package com.pluralsight.Controllers;
 
-import com.pluralsight.IOExceptionHandler;
-import com.pluralsight.TransactionData;
+import com.pluralsight.util.IOExceptionHandler;
 import com.pluralsight.util.SceneSwitcher;
+import com.pluralsight.util.TransactionData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

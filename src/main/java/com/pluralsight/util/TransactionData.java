@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.util;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

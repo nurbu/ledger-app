@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import com.pluralsight.util.TransactionData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,14 +34,14 @@ public class Main extends Application {
             stage.show();
             stage.setOnCloseRequest(event -> {
                 event.consume();
-                logout(stage);
+                exit(stage);
             });
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
         }
     }
 
-    public void logout(Stage stage) {
+    public void exit(Stage stage) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit Application");

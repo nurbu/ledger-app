@@ -1,10 +1,6 @@
 package com.pluralsight.Controllers;
 
-import com.pluralsight.IOExceptionHandler;
-import com.pluralsight.TableHeaderPrep;
-import com.pluralsight.Transaction;
-import com.pluralsight.TransactionData;
-import com.pluralsight.util.SceneSwitcher;
+import com.pluralsight.util.*;
 import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.Scene;
