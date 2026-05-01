@@ -5,14 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.io.*;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
-import java.util.Scanner;
 
 
 public class TransactionData {
@@ -371,54 +369,8 @@ public class TransactionData {
     }
 
     /**
-     * Prompts for a date and time in yyyy-MM-dd HH:mm:ss formats and re-prompts
-     * until the user inputs a properly formatted date and time
-     *
-     * @return the parsed LocalDateTime
+     * All transactions, no filter.
      */
-
-    public static LocalDateTime promptDateTime(Scanner scanner) {
-        LocalDateTime dateTime = null;
-        boolean isValidDateTime = false;
-        while (!isValidDateTime) {
-            System.out.print("Enter date and time(yyyy-MM-dd HH:mm:ss): ");
-            try {
-                dateTime = LocalDateTime.parse(scanner.nextLine().trim(), DATETIME_FMT);
-                isValidDateTime = true;
-            } catch (DateTimeException e) {
-                System.out.println("Invalid date and time. Please enter a valid date and time.");
-            }
-        }
-        return dateTime;
-    }
-
-    /**
-     * Prompts for a positive amount and re-prompts until input is valid.
-     *
-     * @return a positive amount entered by user
-     */
-    public static double promptPositiveAmount(Scanner scanner) {
-        double amount = 0;
-        boolean isValidAmount = false;
-        while (!isValidAmount) {
-            System.out.print("Enter amount: ");
-            if (scanner.hasNextDouble()) {
-                amount = scanner.nextDouble();
-                scanner.nextLine();
-                if (amount > 0) {
-                    isValidAmount = true;
-                } else {
-                    System.out.println("Please enter a positive amount");
-                }
-            } else {
-                System.out.print("Invalid amount. Please enter a valid number.");
-                scanner.nextLine();
-            }
-        }
-        return amount;
-    }
-
-    // All transactions, no filter.
     public static ObservableList<Transaction> allTransactions() {
         return transactions;
     }

@@ -7,6 +7,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Builds simple Table Columns to be reused when creating TableViews
+ */
 public class TableHeaderPrep {
     public static TableView<Transaction> tableBuilder() {
         TableColumn<Transaction, LocalDate> dateCol = new TableColumn<>("Date");
