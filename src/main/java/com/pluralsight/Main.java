@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
+    // Starts launch
     public static void main(String[] args) {
         launch(args);
     }
@@ -20,18 +20,22 @@ public class Main extends Application {
     public void start(Stage stage) {
         String FILE_NAME = "transactions.csv";
         try {
-            // Similar to div can only have 1 in java.
+            // Loads the FXML layout
             Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen.fxml"));
+
+            // Loads our ObservableList from transactions.csv
             TransactionData transactionData = new TransactionData();
             transactionData.loadTransactions(FILE_NAME);
 
-            // similar to HTML doc
+
             Scene scene = new Scene(root);
 
-            // Window
+            // Window configurations
             stage.setTitle("Ledger");
             stage.setScene(scene);
             stage.show();
+
+            // When closing window steps to take
             stage.setOnCloseRequest(event -> {
                 event.consume();
                 exit(stage);
@@ -41,6 +45,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Confirms before closing app
+     *
+     * @param stage The window
+     */
     public void exit(Stage stage) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
