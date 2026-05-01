@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 
 public class TransactionData {
-
+    private static final String FILE_NAME = "transactions.csv";
     private static final ObservableList<Transaction> transactions = FXCollections.observableArrayList();
 
     private static final String DATE_PATTERN = "yyyy-MM-dd";
@@ -269,38 +269,38 @@ public class TransactionData {
      * Lets user search transactions with multiple criteria
      * Any field left empty, null or 0.0 is later skipped when finding matches.
      */
-    private static void customSearch() {
-
-        // Checks if skipped by user and criteria doesn't match for each filter and for each transaction.
-        for (Transaction transaction : transactions) {
-
-            if (startDate != null && transaction.getDate().isBefore(startDate)) {
-                continue;
-            }
-            if (endDate != null && transaction.getDate().isAfter(endDate.plusDays(1))) {
-                continue;
-            }
-            if (!description.isEmpty() && !transaction.getDescription().toLowerCase().equals(description)) {
-                continue;
-            }
-            if (!vendor.isEmpty() && !transaction.getVendor().toLowerCase().equals(vendor)) {
-                continue;
-            }
-            if (amount != 0.0 && transaction.getAmount() != amount) {
-                continue;
-            }
-
-            System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-                    transaction.getDescription(), transaction.getVendor(),
-                    transaction.getAmount());
-            foundTransactions = true;
-        }
-        if (!foundTransactions) {
-            System.out.println("No transactions found");
-        }
-        System.out.println(SEPARATOR);
-
-    }
+//    private static void customSearch() {
+//
+//        // Checks if skipped by user and criteria doesn't match for each filter and for each transaction.
+//        for (Transaction transaction : transactions) {
+//
+//            if (startDate != null && transaction.getDate().isBefore(startDate)) {
+//                continue;
+//            }
+//            if (endDate != null && transaction.getDate().isAfter(endDate.plusDays(1))) {
+//                continue;
+//            }
+//            if (!description.isEmpty() && !transaction.getDescription().toLowerCase().equals(description)) {
+//                continue;
+//            }
+//            if (!vendor.isEmpty() && !transaction.getVendor().toLowerCase().equals(vendor)) {
+//                continue;
+//            }
+//            if (amount != 0.0 && transaction.getAmount() != amount) {
+//                continue;
+//            }
+//
+//            System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
+//                    transaction.getDescription(), transaction.getVendor(),
+//                    transaction.getAmount());
+//            foundTransactions = true;
+//        }
+//        if (!foundTransactions) {
+//            System.out.println("No transactions found");
+//        }
+//        System.out.println(SEPARATOR);
+//
+//    }
 
     /**
      * Parse date string
