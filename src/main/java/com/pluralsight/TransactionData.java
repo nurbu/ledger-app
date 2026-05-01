@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 import java.util.Scanner;
 
 
@@ -73,6 +74,7 @@ public class TransactionData {
                     System.out.println("Skipping bad line: " + line + "(" + e.getMessage() + ")");
                 }
             }
+            transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
             // catches file not being found or can't read, etc....
         } catch (IOException e) {
             System.out.println("Error reading file:  " + e.getMessage());
@@ -181,25 +183,23 @@ public class TransactionData {
      * Same for loop as displayLedger
      * added if amount < 0 to only print deposits.
      */
-    private static void displayPayments() { /* TODO – only amount < 0               */
+    public static ObservableList<Transaction> displayPayments() { /* TODO – only amount < 0               */
         boolean foundPayments = false;
-        System.out.println("All Payments");
-        System.out.print(HEADER);
-        System.out.println(SEPARATOR);
-
+        ObservableList<Transaction> localTransactions = FXCollections.observableArrayList();
         for (Transaction transaction : transactions) {
             // Checks transaction to see if Payment.
             if (transaction.getAmount() < 0) {
-                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-                        transaction.getDescription(), transaction.getVendor(),
-                        transaction.getAmount());
+                localTransactions.add(transaction);
                 foundPayments = true;
             }
         }
         if (!foundPayments) {
-            System.out.println("No payments found");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No transactions found");
+            alert.showAndWait();
         }
-        System.out.println(SEPARATOR);
+        return localTransactions;
     }
 
     /**

@@ -41,6 +41,14 @@ public class LedgerMenuButtonsController {
     }
 
     public void displayAllPayments(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        Group root = new Group();
+        TableView<Transaction> table = TableHeaderPrep.tableBuilder();
+        root.getChildren().add(table);
+        table.setItems(TransactionData.displayPayments());
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void switchToReportsMenu(ActionEvent actionEvent) {
