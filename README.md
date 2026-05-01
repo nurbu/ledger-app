@@ -1,4 +1,7 @@
+<img width="260" height="280" alt="ledger-icon" src="https://github.com/user-attachments/assets/a761dbdb-db7f-4c2f-bf8c-6a1f1ff19c12" />
+
 # Ledger App
+
 
 ## Description of the Project
 
@@ -76,14 +79,39 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Demo
 
-![Screenshot 2026-05-01 at 5.22.42 AM.png](../../../Screenshot%202026-05-01%20at%205.22.42%E2%80%AFAM.png)
-![Screenshot 2026-05-01 at 5.22.55 AM.png](../../../Screenshot%202026-05-01%20at%205.22.55%E2%80%AFAM.png)
-![Screenshot 2026-05-01 at 5.59.02 AM.png](../../../Screenshot%202026-05-01%20at%205.59.02%E2%80%AFAM.png)
-![Screenshot 2026-05-01 at 5.23.12 AM.png](../../../Screenshot%202026-05-01%20at%205.23.12%E2%80%AFAM.png)
-![Screenshot 2026-05-01 at 5.23.27 AM.png](../../../Screenshot%202026-05-01%20at%205.23.27%E2%80%AFAM.png)
-![Screenshot 2026-05-01 at 5.25.53 AM.png](../../../Screenshot%202026-05-01%20at%205.25.53%E2%80%AFAM.png)
-![Screenshot 2026-05-01 at 5.24.26 AM.png](../../../Screenshot%202026-05-01%20at%205.24.26%E2%80%AFAM.png)
-![Screenshot 2026-05-01 at 5.24.08 AM.png](../../../Screenshot%202026-05-01%20at%205.24.08%E2%80%AFAM.png)
+HomeScreen
+
+<img width="597" height="427" alt="Screenshot 2026-05-01 at 5 22 42 AM" src="https://github.com/user-attachments/assets/72131925-fa24-4289-8e92-747a474a2d3d" />
+
+Deposit Screen
+
+<img width="593" height="425" alt="Screenshot 2026-05-01 at 5 22 55 AM" src="https://github.com/user-attachments/assets/8f1abf2f-3bd5-45e0-b77d-fdafa09dfccb" />
+
+Payment Screen
+
+<img width="592" height="430" alt="Screenshot 2026-05-01 at 5 23 12 AM" src="https://github.com/user-attachments/assets/e3a68e91-17f3-437d-9e2f-f7b6c8c4a6c4" />
+
+Ledger Screen
+
+<img width="599" height="433" alt="Screenshot 2026-05-01 at 5 23 27 AM" src="https://github.com/user-attachments/assets/d3c0e6e1-1796-4178-9738-8d3366bb1dc5" />
+
+Report Screen
+
+<img width="592" height="424" alt="Screenshot 2026-05-01 at 5 59 02 AM" src="https://github.com/user-attachments/assets/91449330-447d-4049-8d90-1c65fa9be8cd" />
+
+Table Format
+
+<img width="1000" height="426" alt="Screenshot 2026-05-01 at 5 25 53 AM" src="https://github.com/user-attachments/assets/aae8b696-41c2-4fc6-b2fe-5f65e94b2efe" />
+
+
+Optional Alerts
+
+<img width="607" height="431" alt="Screenshot 2026-05-01 at 5 24 26 AM" src="https://github.com/user-attachments/assets/d837d2e9-b7b7-4b77-8e09-8610925c26d9" />
+<img width="598" height="429" alt="Screenshot 2026-05-01 at 5 24 08 AM" src="https://github.com/user-attachments/assets/951ca72f-1b4f-491b-9570-fd1c5273fb88" />
+
+
+
+
 
 ## Future Work
 
