@@ -19,12 +19,17 @@ import java.io.IOException;
  * @param "event" Button click
  */
 public class HomeScreenButtonsController {
+
+    /**
+     * Root pane of the home screen
+     * Used to grab stage when exiting.
+     */
     @FXML
     private AnchorPane scenePane;
 
-    private Stage stage;
-
-
+    /**
+     * Switches to Add Deposit Screen
+     */
     public void switchToAddDeposit(ActionEvent event) {
         try {
             SceneSwitcher.SceneSwitcher(event, "/AddDeposit.fxml");
@@ -33,6 +38,9 @@ public class HomeScreenButtonsController {
         }
     }
 
+    /**
+     * Switches to Add Payment Screen
+     */
     public void switchToAddPayment(ActionEvent event) {
         try {
             SceneSwitcher.SceneSwitcher(event, "/AddPayment.fxml");
@@ -41,6 +49,9 @@ public class HomeScreenButtonsController {
         }
     }
 
+    /**
+     * Switches to Add Ledger Menu
+     */
     public void switchToLedgerMenu(ActionEvent event) {
         try {
             SceneSwitcher.SceneSwitcher(event, "/LedgerMenu.fxml");

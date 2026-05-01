@@ -9,7 +9,13 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+/**
+ * Controller for the Add Payment Screen
+ * Handles the user input from TextFields and Back to Home Screen button.
+ */
 public class AddPaymentController {
+
+    // Ids of TextFields linked by FXML
     @FXML
     private TextField dateAndTimeField;
     @FXML
@@ -19,7 +25,12 @@ public class AddPaymentController {
     @FXML
     private TextField amountField;
 
-
+    /**
+     * User click actives the submit button.
+     * Takes User input and send to Transaction.addPayment to handle appending to ObservableList and transactions.csv
+     *
+     * @param actionEvent
+     */
     public void submitButton(ActionEvent actionEvent) {
         String dateAndTime = dateAndTimeField.getText();
         String description = descriptionField.getText();
@@ -29,6 +40,7 @@ public class AddPaymentController {
         TransactionData.addDeposit(dateAndTime, description, vendor, amount);
     }
 
+    // Activation returns user to Home Screen
     public void returnHome(ActionEvent actionEvent) {
         try {
             SceneSwitcher.SceneSwitcher(actionEvent, "/HomeScreen.fxml");

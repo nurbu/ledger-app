@@ -12,10 +12,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Controller for Reports Menu Screen
+ * Able to give different preset date ranges
+ * Vendor search, and custom search with multiple fields.
+ */
 public class ReportsMenuButtonsController {
 
+    // Input fields for the search by vendor button
     @FXML
     private TextField vendorFilter;
+    // Input fields for the search by custom search button
     @FXML
     private TextField stringStartDate;
     @FXML
@@ -27,6 +34,9 @@ public class ReportsMenuButtonsController {
     @FXML
     private TextField amountCustomSearch;
 
+    /**
+     * Shows transactions from 1st of this month to today
+     */
     public void monthToDate(ActionEvent actionEvent) {
         LocalDate today = LocalDate.now();
         LocalDate start = today.withDayOfMonth(1);
@@ -40,6 +50,9 @@ public class ReportsMenuButtonsController {
         stage.show();
     }
 
+    /**
+     * Shows transactions from the entire previous month
+     */
     public void previousMonth(ActionEvent actionEvent) {
         LocalDate firstDayOfTheMonth = LocalDate.now().withDayOfMonth(1);
         LocalDate start = firstDayOfTheMonth.minusMonths(1);
@@ -54,6 +67,9 @@ public class ReportsMenuButtonsController {
         stage.show();
     }
 
+    /**
+     * Shows transactions from Jan 1st of this year to today
+     */
     public void yearToDate(ActionEvent actionEvent) {
         LocalDate today = LocalDate.now();
         LocalDate start = today.withDayOfYear(1);
@@ -67,6 +83,9 @@ public class ReportsMenuButtonsController {
         stage.show();
     }
 
+    /**
+     * Shows transactions from the entire previous year
+     */
     public void previousYear(ActionEvent actionEvent) {
         int lastYear = LocalDate.now().getYear() - 1;
         LocalDate start = LocalDate.of(lastYear, 1, 1);
@@ -81,6 +100,9 @@ public class ReportsMenuButtonsController {
         stage.show();
     }
 
+    /**
+     * Shows transactions that contains the inputted vendor
+     */
     public void searchByVendor(ActionEvent actionEvent) {
         String vendor = vendorFilter.getText().toLowerCase();
         Stage stage = new Stage();
@@ -93,6 +115,7 @@ public class ReportsMenuButtonsController {
         stage.show();
     }
 
+    //** Shows transactions using multiple fields. Fields(Optional) */
     public void customSearch(ActionEvent actionEvent) {
         String startDate = stringStartDate.getText();
         String endDate = stringEndDate.getText();
@@ -109,6 +132,9 @@ public class ReportsMenuButtonsController {
         stage.show();
     }
 
+    /**
+     * Returns user to LegerMenu
+     */
     public void returnLedgerMenu(ActionEvent actionEvent) {
         try {
             SceneSwitcher.SceneSwitcher(actionEvent, "/LedgerMenu.fxml");

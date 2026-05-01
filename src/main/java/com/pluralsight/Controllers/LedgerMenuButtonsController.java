@@ -9,9 +9,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for the Ledger Menu Page
+ * Opens transactions views in new windows and handles pages changes
+ */
 public class LedgerMenuButtonsController {
+
+    // Opens a new window with a TableView showing every transaction
     public void displayAllTransactions(ActionEvent actionEvent) {
-        // Created the columns for the column view
+
         Stage stage = new Stage();
         Group root = new Group();
 
@@ -25,6 +31,7 @@ public class LedgerMenuButtonsController {
 
     }
 
+    // Opens a new window with a TableView showing only deposit transaction.
     public void displayAllDeposits(ActionEvent actionEvent) {
         Stage stage = new Stage();
         Group root = new Group();
@@ -36,6 +43,7 @@ public class LedgerMenuButtonsController {
         stage.show();
     }
 
+    // Opens a new window with a TableView showing only payment transaction.
     public void displayAllPayments(ActionEvent actionEvent) {
         Stage stage = new Stage();
         Group root = new Group();
@@ -47,6 +55,7 @@ public class LedgerMenuButtonsController {
         stage.show();
     }
 
+    // Takes user to Reports menu page
     public void switchToReportsMenu(ActionEvent actionEvent) {
         try {
             SceneSwitcher.SceneSwitcher(actionEvent, "/ReportsMenu.fxml");
@@ -55,6 +64,7 @@ public class LedgerMenuButtonsController {
         }
     }
 
+    // Send user back to Home Screen
     public void returnHome(ActionEvent actionEvent) {
         try {
             SceneSwitcher.SceneSwitcher(actionEvent, "/HomeScreen.fxml");
