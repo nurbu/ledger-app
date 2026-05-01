@@ -30,6 +30,14 @@ public class LedgerMenuButtonsController {
     }
 
     public void displayAllDeposits(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        Group root = new Group();
+        TableView<Transaction> table = TableHeaderPrep.tableBuilder();
+        root.getChildren().add(table);
+        table.setItems(TransactionData.displayDeposits());
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void displayAllPayments(ActionEvent actionEvent) {

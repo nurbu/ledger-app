@@ -150,44 +150,30 @@ public class TransactionData {
         }
     }
 
-    // All transactions, no filter.
-    private static void displayLedger() { /* TODO – print all transactions in column format */
-        System.out.println("All Transactions");
-        System.out.print(HEADER);
-        System.out.println(SEPARATOR);
-        for (Transaction transaction : transactions) {
-            System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-                    transaction.getDescription(), transaction.getVendor(),
-                    transaction.getAmount());
-        }
-        System.out.println(SEPARATOR);
-
-    }
-
     /**
      * Displays Deposits
      * Same for loop as displayLedger
      * added if amount > 0 to only print deposits.
      */
-    private static void displayDeposits() { /* TODO – only amount > 0               */
+    public static ObservableList<Transaction> displayDeposits() {
+
         boolean foundDeposits = false;
-        System.out.println("All Deposits");
-        System.out.print(HEADER);
-        System.out.println(SEPARATOR);
+        ObservableList<Transaction> localTransactions = FXCollections.observableArrayList();
 
         for (Transaction transaction : transactions) {
             // Checks transaction to see if Deposit.
             if (transaction.getAmount() > 0) {
-                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-                        transaction.getDescription(), transaction.getVendor(),
-                        transaction.getAmount());
+                localTransactions.add(transaction);
                 foundDeposits = true;
             }
         }
         if (!foundDeposits) {
-            System.out.println("No deposits found");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No transactions found");
+            alert.showAndWait();
         }
-        System.out.println(SEPARATOR);
+        return localTransactions;
     }
 
     /**
@@ -407,6 +393,7 @@ public class TransactionData {
         return amount;
     }
 
+    // All transactions, no filter.
     public static ObservableList<Transaction> allTransactions() {
         return transactions;
     }
