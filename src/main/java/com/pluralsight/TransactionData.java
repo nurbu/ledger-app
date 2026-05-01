@@ -271,38 +271,44 @@ public class TransactionData {
      * Lets user search transactions with multiple criteria
      * Any field left empty, null or 0.0 is later skipped when finding matches.
      */
-//    private static void customSearch() {
-//
-//        // Checks if skipped by user and criteria doesn't match for each filter and for each transaction.
-//        for (Transaction transaction : transactions) {
-//
-//            if (startDate != null && transaction.getDate().isBefore(startDate)) {
-//                continue;
-//            }
-//            if (endDate != null && transaction.getDate().isAfter(endDate.plusDays(1))) {
-//                continue;
-//            }
-//            if (!description.isEmpty() && !transaction.getDescription().toLowerCase().equals(description)) {
-//                continue;
-//            }
-//            if (!vendor.isEmpty() && !transaction.getVendor().toLowerCase().equals(vendor)) {
-//                continue;
-//            }
-//            if (amount != 0.0 && transaction.getAmount() != amount) {
-//                continue;
-//            }
-//
-//            System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-//                    transaction.getDescription(), transaction.getVendor(),
-//                    transaction.getAmount());
-//            foundTransactions = true;
-//        }
-//        if (!foundTransactions) {
-//            System.out.println("No transactions found");
-//        }
-//        System.out.println(SEPARATOR);
-//
-//    }
+    public static ObservableList<Transaction> customSearch(String stringStartDate, String stringEndDate, String description, String vendor, String stringAmount) {
+
+        LocalDate startDate = parseDate(stringStartDate);
+        LocalDate endDate = parseDate(stringEndDate);
+        Double amount = parseDouble(stringAmount);
+        ObservableList<Transaction> localTransactions = FXCollections.observableArrayList();
+        boolean foundTransactions = false;
+        // Checks if skipped by user and criteria doesn't match for each filter and for each transaction.
+        for (Transaction transaction : transactions) {
+
+            if (startDate != null && transaction.getDate().isBefore(startDate)) {
+                continue;
+            }
+            if (endDate != null && transaction.getDate().isAfter(endDate.plusDays(1))) {
+                continue;
+            }
+            if (!description.isEmpty() && !transaction.getDescription().toLowerCase().equals(description)) {
+                continue;
+            }
+            if (!vendor.isEmpty() && !transaction.getVendor().toLowerCase().equals(vendor)) {
+                continue;
+            }
+            if (amount != 0.0 && transaction.getAmount() != amount) {
+                continue;
+            }
+
+            localTransactions.add(transaction);
+            foundTransactions = true;
+        }
+        if (!foundTransactions) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No transactions found");
+            alert.showAndWait();
+        }
+
+        return localTransactions;
+    }
 
     /**
      * Parse date string

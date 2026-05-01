@@ -16,8 +16,8 @@
         <Button fx:id="returnHome" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" onAction="#returnLedgerMenu"
                 text="Return to Ledger Menu"/>
         <TextField fx:id="vendorFilter" layoutX="30.0" layoutY="144.0" promptText="Amazon"/>
-        <TextField fx:id="dateCustomSearch" layoutX="14.0" layoutY="240.0" promptText="2026-04-22"/>
-        <TextField fx:id="timeCustomSearch" layoutX="191.0" layoutY="240.0" promptText="04:04:04"/>
+        <TextField fx:id="stringStartDate" layoutX="14.0" layoutY="240.0" promptText="2026-04-22"/>
+        <TextField fx:id="stringEndDate" layoutX="191.0" layoutY="240.0" promptText="04:04:04"/>
         <TextField fx:id="descriptionCustomSearch" layoutX="364.0" layoutY="240.0" promptText="For me"/>
         <TextField fx:id="vendorCustomSearch" layoutX="14.0" layoutY="284.0" promptText="Amazon"/>
         <TextField fx:id="amountCustomSearch" layoutX="191.0" layoutY="284.0" promptText="25"/>

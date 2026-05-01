@@ -20,6 +20,16 @@ public class ReportsMenuButtonsController {
 
     @FXML
     private TextField vendorFilter;
+    @FXML
+    private TextField stringStartDate;
+    @FXML
+    private TextField stringEndDate;
+    @FXML
+    private TextField descriptionCustomSearch;
+    @FXML
+    private TextField vendorCustomSearch;
+    @FXML
+    private TextField amountCustomSearch;
 
     public void monthToDate(ActionEvent actionEvent) {
         LocalDate today = LocalDate.now();
@@ -88,6 +98,19 @@ public class ReportsMenuButtonsController {
     }
 
     public void customSearch(ActionEvent actionEvent) {
+        String startDate = stringStartDate.getText();
+        String endDate = stringEndDate.getText();
+        String description = descriptionCustomSearch.getText().toLowerCase();
+        String vendor = vendorCustomSearch.getText().toLowerCase();
+        String amount = amountCustomSearch.getText();
+        Stage stage = new Stage();
+        Group root = new Group();
+        TableView<Transaction> table = TableHeaderPrep.tableBuilder();
+        root.getChildren().add(table);
+        table.setItems(TransactionData.customSearch(startDate, endDate, description, vendor, amount));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void returnLedgerMenu(ActionEvent actionEvent) {
