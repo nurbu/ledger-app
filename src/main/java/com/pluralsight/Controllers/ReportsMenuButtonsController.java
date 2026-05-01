@@ -7,6 +7,14 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class ReportsMenuButtonsController {
+
+//    public void monthToDate(ActionEvent actionEvent) {
+//        try {
+//        } catch (IOException e) {
+//            IOExceptionHandler.handleIOException(e);
+//        }
+//    }
+
     public void returnLedgerMenu(ActionEvent actionEvent) {
         try {
             SceneSwitcher.SceneSwitcher(actionEvent, "/LedgerMenu.fxml");
