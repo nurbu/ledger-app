@@ -6,11 +6,14 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.pluralsight.Controllers.LedgerMenuButtonsController">
     <children>
-        <Button layoutX="243.0" layoutY="190.0" mnemonicParsing="false" text="Display Payments"/>
-        <Button layoutX="245.0" layoutY="131.0" mnemonicParsing="false" text="Display Deposits"/>
-        <Button layoutX="243.0" layoutY="81.0" mnemonicParsing="false" text="Display Ledger"/>
-        <Button layoutX="244.0" layoutY="247.0" mnemonicParsing="false" text="Reports Menu"/>
-        <Button layoutX="245.0" layoutY="313.0" mnemonicParsing="false" text="Back to Home Screen"/>
+        <Button layoutX="243.0" layoutY="190.0" mnemonicParsing="false" onAction="#displayAllPayments"
+                text="Display Payments"/>
+        <Button layoutX="245.0" layoutY="131.0" mnemonicParsing="false" onAction="#displayAllDeposits"
+                text="Display Deposits"/>
+        <Button layoutX="243.0" layoutY="81.0" mnemonicParsing="false" onAction="#displayAllTransactions"
+                text="Display Ledger"/>
+        <Button layoutX="244.0" layoutY="247.0" mnemonicParsing="false" onAction="#switchToReportsMenu"
+                text="Reports Menu"/>
         <Label layoutX="241.0" layoutY="11.0" prefHeight="27.0" prefWidth="81.0" text="Ledger Menu"/>
         <Label layoutX="234.0" layoutY="48.0" text="Choose an option"/>
         <Button fx:id="returnHome" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" onAction="#returnHome"
