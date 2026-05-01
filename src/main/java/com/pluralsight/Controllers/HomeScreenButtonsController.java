@@ -1,10 +1,9 @@
 package com.pluralsight.Controllers;
 
+import com.pluralsight.IOExceptionHandler;
 import com.pluralsight.util.SceneSwitcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
@@ -14,26 +13,40 @@ import java.io.IOException;
 
 /**
  * HomeScreen Router
+ * Switches to respective file paths using SceneSwitcher.
+ * Use IOExceptionHandler to handle "Failed to load FXML" errors.
+ *
+ * @param "event" Button click
  */
 public class HomeScreenButtonsController {
     @FXML
     private AnchorPane scenePane;
 
     private Stage stage;
-    private Scene scene;
-    private Parent root;
 
 
-    public void switchToAddDeposit(ActionEvent event) throws IOException {
-        SceneSwitcher.SceneSwitcher(event, "/AddDeposit.fxml");
+    public void switchToAddDeposit(ActionEvent event) {
+        try {
+            SceneSwitcher.SceneSwitcher(event, "/AddDeposit.fxml");
+        } catch (IOException e) {
+            IOExceptionHandler.handleIOException(e);
+        }
     }
 
-    public void switchToAddPayment(ActionEvent event) throws IOException {
-        SceneSwitcher.SceneSwitcher(event, "/AddPayment.fxml");
+    public void switchToAddPayment(ActionEvent event) {
+        try {
+            SceneSwitcher.SceneSwitcher(event, "/AddPayment.fxml");
+        } catch (IOException e) {
+            IOExceptionHandler.handleIOException(e);
+        }
     }
 
-    public void switchToLedgerMenu(ActionEvent event) throws IOException {
-        SceneSwitcher.SceneSwitcher(event, "/LedgerMenu.fxml");
+    public void switchToLedgerMenu(ActionEvent event) {
+        try {
+            SceneSwitcher.SceneSwitcher(event, "/LedgerMenu.fxml");
+        } catch (IOException e) {
+            IOExceptionHandler.handleIOException(e);
+        }
     }
 
     /**
@@ -50,7 +63,7 @@ public class HomeScreenButtonsController {
 
 
         if (alert.showAndWait().get() == ButtonType.OK) {
-            stage = (Stage) scenePane.getScene().getWindow();
+            Stage stage = (Stage) scenePane.getScene().getWindow();
             System.out.println("You have successfully exited ledger!");
             stage.close();
         }

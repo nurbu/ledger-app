@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.pluralsight.Controllers.AddController">
+            fx:controller="com.pluralsight.Controllers.AddDepositController">
     <children>
-        <Button layoutX="259.0" layoutY="288.0" mnemonicParsing="false" onAction="#submitButton" text="Submit"/>
+        <Button layoutX="259.0" layoutY="287.0" mnemonicParsing="false" onAction="#submitButton" text="Submit"/>
         <Label layoutX="156.0" layoutY="14.0" prefHeight="49.0" prefWidth="289.0" text="Enter Details of Deposit">
             <font>
                 <Font size="28.0"/>
@@ -21,5 +20,7 @@
         <TextField fx:id="descriptionField" layoutX="126.0" layoutY="123.0" promptText="Paycheck"/>
         <TextField fx:id="vendorField" layoutX="104.0" layoutY="164.0" promptText="Amazon"/>
         <TextField fx:id="amountField" layoutX="156.0" layoutY="206.0" promptText="1"/>
+        <Button fx:id="returnHome" layoutX="10.0" layoutY="353.0" mnemonicParsing="false" onAction="#returnHome"
+                text="Return to Home Screen"/>
     </children>
 </AnchorPane>
