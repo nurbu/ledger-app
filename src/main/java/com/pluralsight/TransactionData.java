@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.time.DateTimeException;
@@ -220,25 +221,25 @@ public class TransactionData {
      * Prints a formatted table to standard output, or a "No transactions found" message
      * if no transaction match the start and end criteria.
      */
-    private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
+    public static ObservableList<Transaction> filterTransactionsByDate(LocalDate start, LocalDate end) {
 
         boolean foundTransactions = false;
+        ObservableList<Transaction> localTransactions = FXCollections.observableArrayList();
 
-        System.out.println(HEADER);
-        System.out.println(SEPARATOR);
         for (Transaction transaction : transactions) {
             // Checks if transaction is within range of start and end (inclusively)
-            if (!transaction.getDate().isBefore(start) && !transaction.getDate().isAfter(end)) {
-                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-                        transaction.getDescription(), transaction.getVendor(),
-                        transaction.getAmount());
+            if (!transaction.getDate().isBefore(start) && !transaction.getDate().isAfter(end.plusDays(1))) {
+                localTransactions.add(transaction);
                 foundTransactions = true;
             }
         }
         if (!foundTransactions) {
-            System.out.println("No transactions found");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No transactions found");
+            alert.showAndWait();
         }
-        System.out.println(SEPARATOR);
+        return localTransactions;
     }
 
     /**
