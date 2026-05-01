@@ -61,9 +61,11 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 1. Open IntelliJ IDEA.
 2. Select "Open" and navigate to the directory where you cloned or downloaded the project.
-3. After the project opens, wait for IntelliJ to index the files and set up the project.
-4. Find the main class with the `public static void main(String[] args)` method.
-5. Right-click on the file and select 'Run 'YourMainClassName.main()'' to start the application.
+3. After the project opens, Wait for IntelliJ to import the Maven project and download dependencies (you'll see progress
+   at the bottom).
+4. Find the main class with the `public class Main extends Application` method.
+5. In the Maven tool window (right sidebar), run Lifecycle → install — or just run mvn clean install in the terminal.
+6. Then in the sidebar click on Execute Maven Goal and then search mvn clean javafx:run to run project.
 
 ## Technologies Used
 
@@ -74,8 +76,6 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Demo
 
-Include screenshots or GIFs that show your application in action. Use tools
-like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
 ![Screenshot 2026-05-01 at 5.22.42 AM.png](../../../Screenshot%202026-05-01%20at%205.22.42%E2%80%AFAM.png)
 ![Screenshot 2026-05-01 at 5.22.55 AM.png](../../../Screenshot%202026-05-01%20at%205.22.55%E2%80%AFAM.png)
 ![Screenshot 2026-05-01 at 5.59.02 AM.png](../../../Screenshot%202026-05-01%20at%205.59.02%E2%80%AFAM.png)
