@@ -17,9 +17,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        String FILE_NAME = "transactions.csv";
         try {
             // Similar to div can only have 1 in java.
             Parent root = FXMLLoader.load(getClass().getResource("/HomeScreen.fxml"));
+            TransactionData transactionData = new TransactionData();
+            transactionData.loadTransactions(FILE_NAME);
 
             // similar to HTML doc
             Scene scene = new Scene(root);
