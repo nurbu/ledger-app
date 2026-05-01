@@ -85,71 +85,96 @@ public class TransactionData {
      * Gets info from user, then adds to transactions ArrayList.
      * and appends to transactions.csv.
      */
-    private static void addDeposit(Scanner scanner) {
-        boolean addMore = true;
+    public static void addDeposit(String dateAndTime, String description, String vendor, String amount) {
 
-        // Re-prompts the user to add more deposits.
-        while (addMore) {
-
-            // Prompts and validates date time input.
-            LocalDateTime dateTime = promptDateTime(scanner);
-
-            System.out.print("Enter a description: ");
-            String description = scanner.nextLine();
-            System.out.print("Enter a vendor: ");
-            String vendor = scanner.nextLine();
-
-            // Prompts then validates deposit amount to be positive.
-            double amount = promptPositiveAmount(scanner);
-
-            LocalDate date = dateTime.toLocalDate();
-            LocalTime time = dateTime.toLocalTime();
-            Transaction newTransaction = new Transaction(date, time, description, vendor, amount);
-            transactions.add(newTransaction);
-            appendTransactionToFile(newTransaction);
-            System.out.println("\nTransaction added successfully.");
-            System.out.print("Would you like to add another deposit? (Y/N): ");
-            String input = scanner.nextLine().trim();
-            if (input.equalsIgnoreCase("N")) {
-                addMore = false;
-            }
+        if (dateAndTime.isEmpty() || description.isEmpty() || vendor.isEmpty() || amount.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("All fields must be filled");
+            alert.showAndWait();
+            return;
         }
+
+        LocalDate date;
+        LocalTime time;
+        double amountDouble;
+
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, DATETIME_FMT);
+            date = dateTime.toLocalDate();
+            time = dateTime.toLocalTime();
+            amountDouble = parseDouble(amount);
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid date,time or amount");
+            alert.showAndWait();
+            return;
+        }
+        if (amountDouble <= 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid amount");
+            alert.showAndWait();
+            return;
+        }
+        Transaction newTransaction = new Transaction(date, time, description, vendor, amountDouble);
+        transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
+        transactions.add(newTransaction);
+        appendTransactionToFile(newTransaction);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Transaction added");
+        alert.setHeaderText("Thank you for depositing!");
+        alert.showAndWait();
+
     }
 
     /**
      * Same shape as addDeposit
      * Difference -amount to showcase payment in transactions list.
      */
-    private static void addPayment(Scanner scanner) {
-        boolean addMore = true;
-        // Re-prompts the user to add more payments.
-        while (addMore) {
-            // Prompt and validate date time input.
-            LocalDateTime dateTime = promptDateTime(scanner);
-// console color, animations ex: loading bar, etc...
-            // Get description and vendor from user
-            System.out.print("Enter a description: ");
-            String description = scanner.nextLine();
-            System.out.print("Enter a vendor: ");
-            String vendor = scanner.nextLine();
+    public static void addPayment(String dateAndTime, String description, String vendor, String amount) {
 
-            // Prompts then validates payment amount to be positive.
-            double amount = promptPositiveAmount(scanner);
-
-            LocalDate date = dateTime.toLocalDate();
-            LocalTime time = dateTime.toLocalTime();
-
-            // Changed amount to negative
-            Transaction newTransaction = new Transaction(date, time, description, vendor, -amount);
-            transactions.add(newTransaction);
-            appendTransactionToFile(newTransaction);
-            System.out.println("Transaction added successfully.");
-            System.out.println("Would you like to add another payment? (Y/N)");
-            String input = scanner.nextLine().trim();
-            if (input.equalsIgnoreCase("N")) {
-                addMore = false;
-            }
+        if (dateAndTime.isEmpty() || description.isEmpty() || vendor.isEmpty() || amount.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("All fields must be filled");
+            alert.showAndWait();
+            return;
         }
+
+        LocalDate date;
+        LocalTime time;
+        double amountDouble;
+
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, DATETIME_FMT);
+            date = dateTime.toLocalDate();
+            time = dateTime.toLocalTime();
+            amountDouble = parseDouble(amount);
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid date,time or amount");
+            alert.showAndWait();
+            return;
+        }
+        if (amountDouble <= 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid amount");
+            alert.showAndWait();
+            return;
+        }
+        Transaction newTransaction = new Transaction(date, time, description, vendor, -amountDouble);
+        transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
+        transactions.add(newTransaction);
+        appendTransactionToFile(newTransaction);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Transaction added");
+        alert.setHeaderText("Thank you for payment!");
+        alert.showAndWait();
+
     }
 
     /**
@@ -183,7 +208,7 @@ public class TransactionData {
      * Same for loop as displayLedger
      * added if amount < 0 to only print deposits.
      */
-    public static ObservableList<Transaction> displayPayments() { /* TODO – only amount < 0               */
+    public static ObservableList<Transaction> displayPayments() {
         boolean foundPayments = false;
         ObservableList<Transaction> localTransactions = FXCollections.observableArrayList();
         for (Transaction transaction : transactions) {
