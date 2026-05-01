@@ -1,4 +1,7 @@
+<img width="260" height="280" alt="ledger-icon" src="https://github.com/user-attachments/assets/a761dbdb-db7f-4c2f-bf8c-6a1f1ff19c12" />
+
 # Ledger App
+
 
 ## Description of the Project
 
