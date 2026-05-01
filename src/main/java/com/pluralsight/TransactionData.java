@@ -246,24 +246,25 @@ public class TransactionData {
      * Prints all transactions matching the specified vendor.
      * If no matching vendors are found, prints "No transactions found" message.
      */
-    private static void filterTransactionsByVendor(String vendor) {
+    public static ObservableList<Transaction> filterTransactionsByVendor(String vendor) {
+
         boolean foundTransactions = false;
-        System.out.println(vendor + " Transactions");
-        System.out.println(HEADER);
-        System.out.println(SEPARATOR);
+        ObservableList<Transaction> localTransactions = FXCollections.observableArrayList();
+
         for (Transaction transaction : transactions) {
             // Checks if transaction vendor matches specified vendor
-            if (transaction.getVendor().equalsIgnoreCase(vendor)) {
-                System.out.printf(TRANSACTION_FMT, transaction.getDate().format(DATE_FMT), transaction.getTime().format(TIME_FMT),
-                        transaction.getDescription(), transaction.getVendor(),
-                        transaction.getAmount());
+            if (transaction.getVendor().toLowerCase().contains(vendor)) {
+                localTransactions.add(transaction);
                 foundTransactions = true;
             }
         }
         if (!foundTransactions) {
-            System.out.println("No transactions found");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No transactions found");
+            alert.showAndWait();
         }
-        System.out.println(SEPARATOR);
+        return localTransactions;
     }
 
     /**
