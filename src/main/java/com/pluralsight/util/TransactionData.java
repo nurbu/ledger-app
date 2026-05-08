@@ -117,8 +117,8 @@ public class TransactionData {
             return;
         }
         Transaction newTransaction = new Transaction(date, time, description, vendor, amountDouble);
-        transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
         transactions.add(newTransaction);
+        transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
         appendTransactionToFile(newTransaction);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Transaction added");
@@ -165,8 +165,8 @@ public class TransactionData {
             return;
         }
         Transaction newTransaction = new Transaction(date, time, description, vendor, -amountDouble);
-        transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
         transactions.add(newTransaction);
+        transactions.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
         appendTransactionToFile(newTransaction);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Transaction added");
